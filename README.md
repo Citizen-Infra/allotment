@@ -76,7 +76,7 @@ Run the test suite:
 
 ## PII and data lifecycle
 
-- **Contact data encrypted at rest.** The candidate pool blob (names, contact details) is AES-GCM encrypted using `ALLOTMENT_SECRET_KEY` before being written to the database. The key never leaves the server.
+- **Contact data encrypted at rest.** The candidate pool blob (names, contact details) is encrypted with Fernet (AES-128-CBC with HMAC authentication), using a key derived from `ALLOTMENT_SECRET_KEY`, before being written to the database. The key never leaves the server.
 - **Pools auto-purge.** Each pool row has a `purge_after` timestamp. The `python -m allotment.cli purge` command deletes expired rows. The default retention window is 30 days (`ALLOTMENT_POOL_RETENTION_DAYS`); operators set it per deployment.
 - **Operator is sole custodian.** Allotment is self-hosted; no data is sent to any third party by the engine itself. The Harmonica adapter forwards only the selected cohort (names / contact details as configured) when an operator explicitly triggers a hand-off.
 
