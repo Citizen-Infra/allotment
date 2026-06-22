@@ -1,3 +1,4 @@
+from hypothesis import given, settings, strategies as st, HealthCheck
 from allotment.domain import QuotaConfig, QuotaTarget
 from allotment.selection_core.maximin import solve_maximin_weights, draw_selection
 
@@ -28,9 +29,6 @@ def test_draw_is_deterministic(sample_pool):
 
 
 # Step 5: Hypothesis fairness property test
-from hypothesis import given, settings, strategies as st, HealthCheck
-
-
 @settings(max_examples=15, deadline=None,
           suppress_health_check=[HealthCheck.function_scoped_fixture])
 @given(seed=st.integers(min_value=0, max_value=10_000))

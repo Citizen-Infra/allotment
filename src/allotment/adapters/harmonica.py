@@ -1,3 +1,5 @@
+from typing import Any
+
 import httpx
 from allotment.adapters.base import ProvisionResult
 from allotment.domain import Pool, Selection
@@ -9,7 +11,7 @@ class HarmonicaAdapter:
         self.api_key = api_key
         self.client = client or httpx.Client()
 
-    def provision(self, pool: Pool, selection: Selection, session_config: dict) -> ProvisionResult:
+    def provision(self, pool: Pool, selection: Selection, session_config: dict[str, Any]) -> ProvisionResult:
         resp = self.client.post(
             f"{self.base_url}/api/v1/sessions",
             headers={"Authorization": f"Bearer {self.api_key}"},

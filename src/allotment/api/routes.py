@@ -1,12 +1,15 @@
-import json, secrets
+import json
+import secrets
+from collections.abc import Iterator
 from datetime import datetime, timedelta, UTC
+from typing import Any
 from fastapi import APIRouter, Depends, HTTPException
 from allotment.api.auth import require_operator
 from allotment.api.schemas import CreateAssembly, UploadPool, RunDraw, Handoff
 from allotment.config import get_settings
 from allotment.db.session import make_session
 from allotment.db.repo import AssemblyRepo
-from allotment.domain import QuotaConfig
+from allotment.domain import QuotaConfig, Selection
 from allotment.pool_csv import parse_pool_csv, PoolValidationError
 from allotment.quotas import precheck_feasibility
 from allotment.selection_core.audit import run_draw, build_audit_record
@@ -17,7 +20,7 @@ from allotment.adapters.harmonica import HarmonicaAdapter
 router = APIRouter(prefix="/api", dependencies=[Depends(require_operator)])
 
 
-def _repo():
+def _repo() -> Iterator[AssemblyRepo]:
     s = make_session()
     try:
         yield AssemblyRepo(s)
@@ -27,13 +30,13 @@ def _repo():
 
 
 @router.post("/assemblies")
-def create_assembly(body: CreateAssembly, repo=Depends(_repo)):
+def create_assembly(body: CreateAssembly, repo: AssemblyRepo = Depends(_repo)) -> dict[str, Any]:
     a = repo.create_assembly(body.name, body.question)
     return {"assembly_id": a.id}
 
 
 @router.post("/assemblies/{assembly_id}/pool")
-def upload_pool(assembly_id: str, body: UploadPool, repo=Depends(_repo)):
+def upload_pool(assembly_id: str, body: UploadPool, repo: AssemblyRepo = Depends(_repo)) -> dict[str, Any]:
     try:
         pool = parse_pool_csv(body.csv, body.feature_columns, body.id_column, body.contact_column)
     except PoolValidationError as e:
@@ -45,7 +48,7 @@ def upload_pool(assembly_id: str, body: UploadPool, repo=Depends(_repo)):
 
 
 @router.post("/assemblies/{assembly_id}/draw")
-def draw(assembly_id: str, body: RunDraw, repo=Depends(_repo)):
+def draw(assembly_id: str, body: RunDraw, repo: AssemblyRepo = Depends(_repo)) -> dict[str, Any]:
     pool = repo.get_pool(assembly_id)
     if pool is None:
         raise HTTPException(404, detail="pool not found (uploaded? purged?)")
@@ -64,7 +67,7 @@ def draw(assembly_id: str, body: RunDraw, repo=Depends(_repo)):
 
 
 @router.get("/draws/{draw_id}")
-def get_draw(draw_id: str, repo=Depends(_repo)):
+def get_draw(draw_id: str, repo: AssemblyRepo = Depends(_repo)) -> dict[str, Any]:
     row = repo.get_draw(draw_id)
     if row is None:
         raise HTTPException(404, detail="draw not found")
@@ -73,14 +76,13 @@ def get_draw(draw_id: str, repo=Depends(_repo)):
 
 
 @router.post("/draws/{draw_id}/handoff")
-def handoff(draw_id: str, body: Handoff, repo=Depends(_repo)):
+def handoff(draw_id: str, body: Handoff, repo: AssemblyRepo = Depends(_repo)) -> dict[str, Any]:
     row = repo.get_draw(draw_id)
     if row is None:
         raise HTTPException(404, detail="draw not found")
     pool = repo.get_pool(row.assembly_id)
     if pool is None:
         raise HTTPException(409, detail="pool purged; cannot hand off")
-    from allotment.domain import Selection
     selection = Selection(**json.loads(row.selection_json))
     if body.target == "export":
         return CsvJsonExport(body.fmt).provision(pool, selection, {}).model_dump()  # type: ignore[arg-type]

@@ -9,7 +9,7 @@ def canonical_input_hash(pool: Pool, config: QuotaConfig) -> str:
     payload = {
         "candidates": sorted(
             ({"id": c.id, "features": dict(sorted(c.features.items()))} for c in pool.candidates),
-            key=lambda d: d["id"]),
+            key=lambda d: str(d["id"])),
         "config": {
             "panel_size": config.panel_size,
             "targets": sorted(

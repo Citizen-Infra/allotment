@@ -1,5 +1,7 @@
-import csv, io, json
-from typing import Literal
+import csv
+import io
+import json
+from typing import Any, Literal
 from allotment.adapters.base import ProvisionResult
 from allotment.domain import Pool, Selection
 
@@ -8,7 +10,7 @@ class CsvJsonExport:
     def __init__(self, fmt: Literal["csv", "json"] = "csv") -> None:
         self.fmt = fmt
 
-    def provision(self, pool: Pool, selection: Selection, session_config: dict) -> ProvisionResult:
+    def provision(self, pool: Pool, selection: Selection, session_config: dict[str, Any]) -> ProvisionResult:
         chosen = [c for c in pool.candidates if c.id in set(selection.candidate_ids)]
         feature_names = [f.name for f in pool.features]
         if self.fmt == "json":
