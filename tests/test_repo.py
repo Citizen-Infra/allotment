@@ -9,7 +9,8 @@ def repo():
     s = make_session()  # uses settings.database_url; conftest creates tables
     r = AssemblyRepo(s)
     yield r
-    s.rollback(); s.close()
+    s.rollback()
+    s.close()
 
 
 def test_pool_roundtrip_is_encrypted_at_rest(repo, sample_pool):

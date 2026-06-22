@@ -1,4 +1,6 @@
-from pydantic import BaseModel
+from typing import Any
+
+from pydantic import BaseModel, Field
 from allotment.domain import QuotaTarget
 
 
@@ -24,4 +26,4 @@ class RunDraw(BaseModel):
 class Handoff(BaseModel):
     target: str
     fmt: str = "csv"
-    session_config: dict = {}
+    session_config: dict[str, Any] = Field(default_factory=dict)

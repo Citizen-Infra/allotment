@@ -1,5 +1,6 @@
 import json
 from datetime import datetime, UTC, timezone
+from sqlalchemy.orm import Session
 from allotment.crypto import encrypt, decrypt
 from allotment.db.models import AssemblyRow, PoolRow, DrawRow
 from allotment.domain import Pool, DrawResult, QuotaConfig
@@ -19,12 +20,13 @@ def _as_naive_utc(dt: datetime) -> datetime:
 
 
 class AssemblyRepo:
-    def __init__(self, session) -> None:
+    def __init__(self, session: Session) -> None:
         self.session = session
 
     def create_assembly(self, name: str, question: str) -> AssemblyRow:
         row = AssemblyRow(name=name, question=question, created_at=datetime.now(UTC))
-        self.session.add(row); self.session.flush()
+        self.session.add(row)
+        self.session.flush()
         return row
 
     def save_pool(self, assembly_id: str, pool: Pool, purge_after: datetime) -> None:
@@ -50,7 +52,8 @@ class AssemblyRepo:
         row = DrawRow(assembly_id=assembly_id, config_json=config.model_dump_json(),
                       selection_json=result.selection.model_dump_json(),
                       audit_json=audit_json, seed=result.seed, created_at=datetime.now(UTC))
-        self.session.add(row); self.session.flush()
+        self.session.add(row)
+        self.session.flush()
         return row
 
     def get_draw(self, draw_id: str) -> DrawRow | None:
@@ -59,7 +62,7 @@ class AssemblyRepo:
     def purge_expired_pools(self, now: datetime) -> int:
         # SQLite stores DateTime(timezone=True) as naive UTC; Postgres keeps tz-aware.
         # Apply naive normalization only for SQLite; other dialects use tz-aware directly.
-        dialect = self.session.bind.dialect.name
+        dialect = self.session.get_bind().dialect.name
         cutoff = _as_naive_utc(now) if dialect == "sqlite" else now
         rows = self.session.query(PoolRow).filter(PoolRow.purge_after < cutoff).all()
         for r in rows:

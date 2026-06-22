@@ -1,4 +1,4 @@
-from typing import Literal, Protocol
+from typing import Any, Literal, Protocol
 from pydantic import BaseModel
 from allotment.domain import Pool, Selection
 
@@ -12,4 +12,4 @@ class ProvisionResult(BaseModel):
 
 class DeliberationTarget(Protocol):
     def provision(self, pool: Pool, selection: Selection,
-                  session_config: dict) -> ProvisionResult: ...
+                  session_config: dict[str, Any]) -> ProvisionResult: ...
