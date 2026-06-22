@@ -18,7 +18,7 @@ def test_draw_meets_quota_and_size(sample_pool):
     sel, fill = draw_selection(sample_pool, _cfg(), panel_count=20, seed=7)
     assert len(sel.candidate_ids) == 10
     assert fill["gender=F"] == 5
-    assert set(sel.realised_probabilities) <= {c.id for c in sample_pool.candidates}
+    assert set(sel.realised_probabilities) == {c.id for c in sample_pool.candidates}
 
 
 def test_draw_is_deterministic(sample_pool):

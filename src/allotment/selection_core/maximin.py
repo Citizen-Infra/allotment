@@ -15,6 +15,8 @@ def solve_maximin_weights(
     for cid in candidate_ids:
         prob += pulp.lpSum(w[p] for p in panels if cid in p) >= z
     prob.solve(pulp.PULP_CBC_CMD(msg=False))
+    if pulp.LpStatus[prob.status] != "Optimal":
+        raise RuntimeError(f"maximin LP did not solve to optimality: {pulp.LpStatus[prob.status]}")
     return {p: max(0.0, w[p].value() or 0.0) for p in panels}
 
 
