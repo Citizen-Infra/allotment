@@ -1,4 +1,5 @@
 from pydantic import BaseModel, field_validator, model_validator
+from datetime import datetime, UTC
 
 
 class FeatureSpec(BaseModel):
@@ -54,3 +55,11 @@ class DrawResult(BaseModel):
     selection: Selection
     seed: int
     quota_fill: dict[str, int]
+
+
+class AuditRecord(BaseModel):
+    input_hash: str
+    seed: int
+    panel_size: int
+    quota_fill: dict[str, int]
+    created_at: datetime
