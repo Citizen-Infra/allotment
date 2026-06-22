@@ -84,7 +84,7 @@ Run the test suite:
 
 ## Harmonica interop
 
-Allotment wraps Harmonica via its public API (`/api/v1/sessions`). It is not affiliated with Harmonica or Harmonica's operator. The adapter requires a valid `ALLOTMENT_HARMONICA_API_KEY` for the target Harmonica workspace; see `.env.example`.
+Allotment integrates with Harmonica through its public API (`/api/v1/sessions`); the adapter needs a valid `ALLOTMENT_HARMONICA_API_KEY` for the target Harmonica workspace (see `.env.example`). Harmonica is one deliberation target — the same `DeliberationTarget` seam covers CSV/JSON export today and other tools later.
 
 ---
 
