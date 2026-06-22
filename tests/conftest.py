@@ -5,6 +5,12 @@ import pytest
 from allotment.domain import Candidate, Pool, FeatureSpec
 
 
+@pytest.fixture(scope="session", autouse=True)
+def _create_tables():
+    from allotment.db.session import create_all
+    create_all()
+
+
 @pytest.fixture
 def sample_pool() -> Pool:
     # 40 candidates, 2 features: gender {F,M}, age {young,old}
