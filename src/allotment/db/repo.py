@@ -57,9 +57,10 @@ class AssemblyRepo:
         return self.session.get(DrawRow, draw_id)
 
     def purge_expired_pools(self, now: datetime) -> int:
-        # Normalize to naive UTC so comparisons work on both SQLite (naive)
-        # and Postgres (tz-aware stored as UTC by the driver).
-        cutoff = _as_naive_utc(now)
+        # SQLite stores DateTime(timezone=True) as naive UTC; Postgres keeps tz-aware.
+        # Apply naive normalization only for SQLite; other dialects use tz-aware directly.
+        dialect = self.session.bind.dialect.name
+        cutoff = _as_naive_utc(now) if dialect == "sqlite" else now
         rows = self.session.query(PoolRow).filter(PoolRow.purge_after < cutoff).all()
         for r in rows:
             self.session.delete(r)
