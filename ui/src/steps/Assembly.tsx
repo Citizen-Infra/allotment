@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { FormEvent } from 'react';
 import { ShieldCheck, AlertCircle } from 'lucide-react';
 import { createAssembly } from '../api';
 
@@ -13,7 +14,7 @@ export default function Assembly({ onDone }: Props) {
   const [loading, setLoading]   = useState(false);
   const [error, setError]       = useState<string | null>(null);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!token.trim() || !name.trim() || !question.trim()) return;
     setLoading(true);
