@@ -20,6 +20,15 @@
 - **No AI attribution** in commits or content (CIBC public repo). Conventional-commit style messages.
 - **Spec of record:** `docs/specs/2026-06-22-allotment-sortition-design.md`.
 
+## Build environment notes (verified 2026-06-22)
+
+Toolchain on this machine: **Python 3.12 via `py -3.12`** (the default `python` is 3.14 — do not use it); **Node 24 / npm 11**; **Docker is not installed**. Therefore:
+
+- Create the venv with `py -3.12 -m venv .venv`; run tooling via `.venv\Scripts\python -m pip ...` / `.venv\Scripts\python -m pytest`.
+- **Tests run against SQLite**, not Dockerized Postgres. `tests/conftest.py` sets `os.environ["ALLOTMENT_DATABASE_URL"] = "sqlite:///./test_allotment.db"` at the very top of the module — *before* importing any `allotment` module, so the cached `Settings` and the engine pick it up. The ORM models are DB-agnostic; production/self-host still uses Postgres via `ALLOTMENT_DATABASE_URL`.
+- `docker-compose.yml` and the `Dockerfile` remain self-host deliverables. Their live `docker compose up --build` smoke (Task 13 Step 6) is a *self-host* verification for a Docker-equipped machine; in this build, substitute a local `uvicorn` + SQLite smoke (`.venv\Scripts\python -m uvicorn allotment.api.app:create_app --factory`).
+- Tasks 7 and 11 test commands: drop `docker compose up -d db`; just run pytest (SQLite is file-backed, no server needed).
+
 ---
 
 ## File Structure
