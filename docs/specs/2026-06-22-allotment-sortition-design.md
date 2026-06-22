@@ -4,7 +4,8 @@
 - **Date:** 2026-06-22
 - **Owner:** Artem Zhiganov (CIBC)
 - **Repo:** public, `Citizen-Infra` org (not yet created — creation is a separate, confirmed step).
-- **Working name:** *Allotment*. Alternatives considered: *Kleroterion*. Name is trivially changeable before the public repo exists.
+- **Name:** *Allotment* (confirmed 2026-06-22). Alternative considered: *Kleroterion*.
+- **Licence:** AGPL-3.0 (confirmed 2026-06-22) — keep the engine a protected commons.
 
 ## 1. Summary
 
@@ -143,8 +144,8 @@ Python 3.12 · FastAPI · OR-Tools (or PuLP + CBC) · Postgres · React + Vite �
 
 1. **Harmonica participant binding** — can the REST API pre-bind named participants, or only return one shared session link? Determines the `HarmonicaAdapter` shape (§8).
 2. **Solver choice** — OR-Tools vs PuLP+CBC for the leximin optimisation: weigh self-host footprint, licensing, and how cleanly each expresses the iterative leximin objective.
-3. **Licence** — recommend **AGPL-3.0** to keep the engine a protected commons (aligns with CIBC's ethos and resists proprietary capture), vs Apache-2.0 for maximum adoption. To confirm.
-4. **Final name** — Allotment vs Kleroterion vs other.
+3. ~~Licence~~ — **resolved: AGPL-3.0** (confirmed 2026-06-22).
+4. ~~Final name~~ — **resolved: Allotment** (confirmed 2026-06-22).
 
 ## 15. Repository and licensing
 

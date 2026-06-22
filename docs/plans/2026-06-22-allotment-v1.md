@@ -16,7 +16,7 @@
 - **Reproducibility:** every draw is deterministic given `(canonical_input_hash, seed)`; the seed is stored and shown.
 - **Quotas are marginal** (per feature-value min/max), not full intersectional cells, in v1.
 - **PII:** store only opaque `id` + the stratification `features` used + a `contact_ref`; encrypt `contact_ref` at rest; pools auto-purge a configurable number of days after their draw (default 30).
-- **Licence:** AGPL-3.0 (pending final confirmation — see spec §14.3). Add `LICENSE` in the deploy task.
+- **Licence:** AGPL-3.0 (confirmed). Add `LICENSE` in the deploy task.
 - **No AI attribution** in commits or content (CIBC public repo). Conventional-commit style messages.
 - **Spec of record:** `docs/specs/2026-06-22-allotment-sortition-design.md`.
 
