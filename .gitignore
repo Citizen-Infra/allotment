@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+test_allotment.db
+node_modules/
+dist/
+ui/dist/
+.env
+*.egg-info/
+.superpowers/
