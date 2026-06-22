@@ -28,7 +28,7 @@ def draw_selection(
     ids = [c.id for c in pool.candidates]
     weights = solve_maximin_weights(panels, ids)
 
-    total = sum(weights.values()) or 1.0
+    total = sum(weights.values())
     norm = {p: weights[p] / total for p in panels}
     marginals = {cid: sum(norm[p] for p in panels if cid in p) for cid in ids}
 

@@ -28,7 +28,7 @@ def generate_feasible_panels(
             if not panels:
                 raise InfeasibleError("no panel satisfies the quota configuration")
             break
-        panels.add(frozenset(cid for cid in ids if x[cid].value() == 1))
+        panels.add(frozenset(cid for cid in ids if round(x[cid].value() or 0) == 1))
         if len(panels) >= count:
             break
     if not panels:
