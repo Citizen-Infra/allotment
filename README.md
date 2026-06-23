@@ -117,6 +117,12 @@ All settings use the `ALLOTMENT_` prefix and can be set via environment variable
 
 ---
 
+## Support
+
+Allotment is built by the [Citizen Infrastructure Builders Club](https://opencollective.com/citizen-infra) as open civic infrastructure. If it is useful to you, you can support its development on Open Collective:
+
+**[opencollective.com/citizen-infra/projects/allotment](https://opencollective.com/citizen-infra/projects/allotment)**
+
 ## License
 
 [GNU Affero General Public License v3.0](LICENSE)
