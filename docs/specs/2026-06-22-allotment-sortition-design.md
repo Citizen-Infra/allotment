@@ -91,7 +91,7 @@ Operator path:
 ## 7. The selection core (the legitimacy heart)
 
 - **Input:** pool (feature vector per person), quota constraints (per feature-value min/max), panel size.
-- **Method:** find a distribution over selections that satisfies the quotas while making each eligible person's marginal probability of selection as equal as the quotas allow (a **leximin** fairness objective), then draw one panel from that distribution under a **published random seed**. Reference: Flanigan, Gölz, et al., "Fair algorithms for selecting citizens' assemblies," *Nature*, 2021 (verify exact citation + the reference implementation during planning). Solver: Google OR-Tools, or PuLP + CBC (decided in planning; see §14).
+- **Method:** find a distribution over selections that satisfies the quotas while making each eligible person's marginal probability of selection as equal as the quotas allow (a **leximin** fairness objective), then draw one panel from that distribution under a **published random seed**. Reference: Flanigan, Gölz, Hammond, Hennig & Procaccia, "Fair algorithms for selecting citizens' assemblies," *Nature* 596 (2021); the Sortition Foundation's [`sortition-algorithms`](https://github.com/sortitionfoundation/sortition-algorithms) is the reference implementation (prior art, §16). v1 ships **maximin**, the dominant leximin level; full leximin is tracked in issue #6. Solver: Google OR-Tools, or PuLP + CBC (decided in planning; see §14).
 - **Output:** selected ids, each person's realised selection probability, a quota-fill report, and a reproducibility bundle (seed + canonical input hash).
 - **Properties:** deterministic given the seed; produces an identical selection on re-run with the same inputs + seed; no I/O. These properties are the basis of the test suite (§11).
 
@@ -150,3 +150,24 @@ Python 3.12 · FastAPI · OR-Tools (or PuLP + CBC) · Postgres · React + Vite �
 ## 15. Repository and licensing
 
 Public repo under the `Citizen-Infra` GitHub org. Repo creation, licence selection (§14.3), and scaffolding happen *after* this spec is approved and an implementation plan is written — each as a confirmed step.
+
+## 16. Prior art and positioning
+
+Sortition splits into two layers: **selection** (the lottery that picks a representative panel) and **deliberation** (the panel's discussion itself). They are normally separate tools. Allotment lives in the selection layer and hands off to the deliberation layer; its real peers are the other selection tools below, not the deliberation platforms.
+
+**Algorithmic lineage.** The fair-selection method is Flanigan, Gölz, Hammond, Hennig & Procaccia, "Fair algorithms for selecting citizens' assemblies," *Nature* 596 (2021), https://www.nature.com/articles/s41586-021-03788-6. It introduced **leximin**: maximise the minimum individual selection probability subject to the quotas, then lexicographically the next-lowest, and so on. As of 2021 the Sortition Foundation had used it for 40+ real panels.
+
+**Closest existing tools** (all open source, Sortition Foundation unless noted):
+- [`sortition-algorithms`](https://github.com/sortitionfoundation/sortition-algorithms) — the current Python library implementing full leximin; the direct analogue of Allotment's `selection_core` and the reference to differential-test against.
+- [`stratification-app`](https://github.com/sortitionfoundation/stratification-app) — the older desktop GUI over the same algorithms.
+- **StratifySelect** — the Sortition Foundation's hosted / open-source product on top of the library.
+- [`groupselect-app`](https://github.com/sortitionfoundation/groupselect-app) — adjacent: splits a selected assembly into balanced small groups.
+- **Panelot**, **Sortition Magic** — other web-based selection tools using the same algorithmic idea.
+
+**How Allotment is positioned:**
+- **Service, not library.** The peers are a Python package and desktop apps; Allotment is a self-hostable API + UI + Postgres + Docker, with the selection algorithm as one module inside a deployable system.
+- **Spans the selection→deliberation handoff.** The `DeliberationTarget` seam (§8) crosses the boundary the selection tools deliberately leave open; no existing tool stitches the lottery directly into an online deliberation runtime.
+- **Verifiable reproducibility as the frontier.** The open problem in the field is *transparent* lotteries — publishing the panel and letting anyone verify the draw was fair. Allotment's `(input_hash, seed)` bundle (§7) targets exactly that.
+- **maximin = leximin level 1.** v1 ships maximin; full lexicographic leximin (issue #6) is the headline algorithmic roadmap item — the specific property that lets the Sortition Foundation call its draw "the fairest."
+
+**When to use what.** If you only need the selection math as a dependency, use `sortition-algorithms`. Allotment is for operators who want to run the whole draw-to-deliberation flow as a self-hosted system.

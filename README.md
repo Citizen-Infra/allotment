@@ -20,7 +20,21 @@ It owns the *selection* layer — the civic lottery that grounds the legitimacy 
 
 The draw uses **maximin over quota-feasible panels**: the solver maximises the minimum selection probability across all candidates, subject to the operator's stratification quotas. This is a leximin-style fair lottery — no candidate who fits a needed category is systematically passed over in favour of another.
 
-Full algorithm specification: [`docs/specs/2026-06-22-allotment-sortition-design.md`](docs/specs/2026-06-22-allotment-sortition-design.md)
+The method is the leximin family introduced in Flanigan, Gölz, Hammond, Hennig & Procaccia, ["Fair algorithms for selecting citizens' assemblies"](https://www.nature.com/articles/s41586-021-03788-6) (*Nature*, 2021). Full algorithm specification: [`docs/specs/2026-06-22-allotment-sortition-design.md`](docs/specs/2026-06-22-allotment-sortition-design.md)
+
+---
+
+## Related work
+
+Allotment's draw implements the fair-lottery method that the [Sortition Foundation](https://github.com/sortitionfoundation) uses to select real citizens' assemblies. Their [`sortition-algorithms`](https://github.com/sortitionfoundation/sortition-algorithms) library is the closest prior art — a mature implementation of the full leximin objective.
+
+Allotment differs in shape, not pedigree:
+
+- **A deployable service, not a library.** `sortition-algorithms` is a Python package you import; Allotment is a self-hostable API + web UI + Postgres you stand up, with the selection logic as one module inside it.
+- **It carries the cohort across the selection/deliberation boundary.** The `DeliberationTarget` seam hands the drawn panel straight to a deliberation tool (Harmonica today, CSV/JSON always) — the step the selection libraries leave to the operator.
+- **v1 does maximin, the dominant level of leximin.** Full lexicographic leximin — the property that makes a lottery provably as fair as the quotas allow — is tracked in [issue #6](https://github.com/Citizen-Infra/allotment/issues/6).
+
+If you only need the selection math as a dependency, use `sortition-algorithms`. Allotment is for running the whole draw-to-deliberation flow as a self-hosted system.
 
 ---
 
