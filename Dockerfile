@@ -2,7 +2,11 @@
 FROM node:20 AS ui
 WORKDIR /ui
 COPY ui/package*.json ./
-RUN npm ci
+# npm install (not `npm ci`): the lockfile is authored on Windows and omits the
+# Linux-only optional native bindings (rolldown/oxc → @emnapi/*) that `npm ci`
+# strictly requires, so `npm ci` fails on the Linux build. `npm install` resolves
+# the correct per-platform deps at build time.
+RUN npm install --no-audit --no-fund
 COPY ui/ ./
 RUN npm run build
 
