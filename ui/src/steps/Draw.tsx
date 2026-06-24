@@ -1,27 +1,23 @@
-import { useEffect, useState } from 'react';
-import { AlertCircle, AlertTriangle, ChevronRight, RotateCcw } from 'lucide-react';
+import { useState } from 'react';
+import { AlertCircle, AlertTriangle, ChevronRight, ChevronLeft, RotateCcw, Shuffle } from 'lucide-react';
 import { runDraw, type DrawResult, type QuotaTarget } from '../api';
 
 interface Props {
   token: string;
   assemblyId: string;
   panelSize: number;
+  candidateCount: number;
   targets: QuotaTarget[];
   onDone: (draw: DrawResult) => void;
   onBack: () => void;
 }
 
-export default function Draw({ token, assemblyId, panelSize, targets, onDone, onBack }: Props) {
-  const [loading, setLoading]   = useState(false);
-  const [error, setError]       = useState<string | null>(null);
-  const [result, setResult]     = useState<DrawResult | null>(null);
-  const [ran, setRan]           = useState(false);
+export default function Draw({ token, assemblyId, panelSize, candidateCount, targets, onDone, onBack }: Props) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError]     = useState<string | null>(null);
+  const [result, setResult]   = useState<DrawResult | null>(null);
 
-  useEffect(() => {
-    if (!ran) { setRan(true); triggerDraw(); }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  // The draw is deliberate: it only runs when the operator presses "Run the draw".
   async function triggerDraw() {
     setLoading(true);
     setError(null);
@@ -50,26 +46,74 @@ export default function Draw({ token, assemblyId, panelSize, targets, onDone, on
   return (
     <div>
       <div className="step-eyebrow">Step 4 of 5</div>
-      <h2 className="card-title">Draw results</h2>
+      <h2 className="card-title">{result ? 'Draw results' : 'Review and run the draw'}</h2>
       <p className="card-desc">
-        Stratified random selection has been run. Review the selected cohort,
-        quota fill rates, and the published seed before proceeding.
+        {result
+          ? 'Stratified random selection has been run. Review the selected cohort, quota fill rates, and the published seed before proceeding.'
+          : 'Confirm the parameters below, then run the draw. It uses a stratified random lottery under a published seed, so anyone with the same inputs and seed can reproduce the exact selection.'}
       </p>
 
-      {loading && (
-        <div className="alert alert-info" style={{ justifyContent: 'center', gap: 12 }}>
-          <span className="spinner spinner-dark" aria-hidden="true" />
-          <span>Running stratified draw…</span>
-        </div>
+      {/* ── Pre-draw review (shown until a draw has been run) ───────────────── */}
+      {!result && (
+        <>
+          <div className="stat-grid">
+            <div className="stat-card">
+              <div className="stat-label">Candidates</div>
+              <div className="stat-value">{candidateCount}</div>
+              <div className="stat-sub">in the pool</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-label">Panel size</div>
+              <div className="stat-value">{panelSize}</div>
+              <div className="stat-sub">seats to fill</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-label">Quota targets</div>
+              <div className="stat-value">{targets.length}</div>
+              <div className="stat-sub">{targets.length === 0 ? 'unrestricted' : 'stratification rules'}</div>
+            </div>
+          </div>
+
+          {!loading && !error && (
+            <div className="alert alert-info" role="note">
+              <Shuffle size={16} />
+              <span>
+                This draws {panelSize} {panelSize === 1 ? 'person' : 'people'} from {candidateCount}{' '}
+                {candidateCount === 1 ? 'candidate' : 'candidates'}
+                {targets.length > 0
+                  ? ` under ${targets.length} quota ${targets.length === 1 ? 'target' : 'targets'}`
+                  : ' with no quota restrictions'}
+                . The selection is recorded with a published seed and is reproducible.
+              </span>
+            </div>
+          )}
+
+          {loading && (
+            <div className="alert alert-info" style={{ justifyContent: 'center', gap: 12 }}>
+              <span className="spinner spinner-dark" aria-hidden="true" />
+              <span>Running stratified draw…</span>
+            </div>
+          )}
+
+          {error && (
+            <div
+              className="alert alert-error"
+              role="alert"
+              style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 6 }}
+            >
+              <span style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 600 }}>
+                <AlertCircle size={16} /> The draw could not be completed
+              </span>
+              <span style={{ fontSize: 13 }}>{error}</span>
+              <span style={{ fontSize: 13, color: 'var(--slate-500)' }}>
+                If the quotas are infeasible, go back and relax the conflicting min/max, or raise the panel size.
+              </span>
+            </div>
+          )}
+        </>
       )}
 
-      {error && (
-        <div className="alert alert-error" role="alert">
-          <AlertCircle size={16} />
-          <span>{error}</span>
-        </div>
-      )}
-
+      {/* ── Results (after a successful draw) ───────────────────────────────── */}
       {result && (
         <>
           {/* Stats */}
@@ -179,11 +223,31 @@ export default function Draw({ token, assemblyId, panelSize, targets, onDone, on
 
       <div className="nav-row">
         <button type="button" className="btn btn-ghost" onClick={onBack} disabled={loading}>
-          <ChevronRight size={16} style={{ transform: 'rotate(180deg)' }} /> Back
+          <ChevronLeft size={16} /> Back
         </button>
         <div className="nav-row-right">
-          {error && (
-            <button type="button" className="btn btn-secondary" onClick={triggerDraw}>
+          {!result && !error && (
+            <button
+              type="button"
+              className="btn btn-primary btn-lg"
+              onClick={triggerDraw}
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <span className="spinner" aria-hidden="true" />
+                  Drawing…
+                </>
+              ) : (
+                <>
+                  <Shuffle size={16} />
+                  Run the draw
+                </>
+              )}
+            </button>
+          )}
+          {!result && error && (
+            <button type="button" className="btn btn-secondary" onClick={triggerDraw} disabled={loading}>
               <RotateCcw size={15} /> Retry
             </button>
           )}

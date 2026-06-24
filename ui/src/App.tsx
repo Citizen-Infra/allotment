@@ -118,6 +118,7 @@ export default function App() {
             token={state.token}
             assemblyId={state.assemblyId}
             panelSize={state.panelSize}
+            candidateCount={state.pool?.candidate_count ?? 0}
             targets={state.targets}
             onDone={draw => {
               setState(s => ({ ...s, draw }));
