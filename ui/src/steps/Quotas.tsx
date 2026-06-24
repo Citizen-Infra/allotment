@@ -113,7 +113,7 @@ export default function Quotas({ features, onDone, onBack }: Props) {
               <option key={i} value={String(i)}>{p.label}</option>
             ))}
           </select>
-          <p className="hint">Pre-fills panel size; edit freely after.</p>
+          <p className="hint">Common body sizes from Bouricius's multi-body sortition design. Pre-fills the panel size; edit freely after.</p>
         </div>
       </div>
 

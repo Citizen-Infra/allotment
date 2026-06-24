@@ -52,12 +52,12 @@ export default function Assembly({ onDone }: Props) {
           type="password"
           value={token}
           onChange={e => setToken(e.target.value)}
-          placeholder="allotment-secret-…"
+          placeholder="Paste your admin token"
           autoComplete="off"
           required
         />
         <p className="hint">
-          Set via <code>ALLOTMENT_SECRET</code> on the server. Kept in memory only.
+          The server's <code>ALLOTMENT_ADMIN_TOKEN</code>. Held in browser memory only, never stored.
         </p>
       </div>
 

@@ -153,7 +153,7 @@ export default function Pool({ token, assemblyId, onDone, onBack }: Props) {
           <div className="field">
             <label>Stratification features</label>
             <p className="hint" style={{ marginBottom: 8 }}>
-              Select the columns to stratify on. These become the quota dimensions.
+              Stratifying makes the panel mirror the population on the traits you choose. Pick those columns; they become the quota dimensions.
             </p>
             <div className="tag-list">
               {columns.map(col => (
