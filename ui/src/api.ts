@@ -23,7 +23,17 @@ async function request<T>(
     let detail = `HTTP ${res.status}`;
     try {
       const json = await res.json();
-      if (json?.detail) detail = String(json.detail);
+      if (json?.detail) {
+        const d = json.detail;
+        // The API returns a string detail for most errors, but an object
+        // ({ error, warnings }) for an infeasible draw. Surface the message.
+        if (typeof d === 'string') detail = d;
+        else if (d && typeof d === 'object' && typeof (d as { error?: unknown }).error === 'string') {
+          detail = (d as { error: string }).error;
+        } else {
+          detail = JSON.stringify(d);
+        }
+      }
     } catch {
       // ignore parse errors; use the status text instead
       detail = res.statusText || detail;

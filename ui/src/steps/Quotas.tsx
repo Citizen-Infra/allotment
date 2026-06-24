@@ -67,7 +67,15 @@ export default function Quotas({ features, onDone, onBack }: Props) {
     feature, value, min, max,
   }));
 
-  const canContinue = panelSize > 0;
+  // A quota target is valid when 0 ≤ min ≤ max ≤ panelSize.
+  function rowError(r: TargetRow): string | null {
+    if (r.min < 0 || r.max < 0) return 'Min and max must be 0 or more.';
+    if (r.min > r.max) return 'Min cannot be greater than max.';
+    if (r.max > panelSize) return `Max cannot exceed the panel size (${panelSize}).`;
+    return null;
+  }
+  const invalidRows = rows.filter(r => rowError(r) !== null).length;
+  const canContinue = panelSize > 0 && invalidRows === 0;
 
   return (
     <div>
@@ -137,57 +145,69 @@ export default function Quotas({ features, onDone, onBack }: Props) {
             <span />
           </div>
 
-          {rows.map(row => (
-            <div key={row.id} className="quota-target-row">
-              <select
-                value={row.feature}
-                onChange={e => updateRow(row.id, { feature: e.target.value })}
-                aria-label="Feature"
-              >
-                {features.map(f => (
-                  <option key={f.name} value={f.name}>{f.name}</option>
-                ))}
-              </select>
+          {rows.map(row => {
+            const err = rowError(row);
+            return (
+              <div key={row.id}>
+                <div className="quota-target-row">
+                  <select
+                    value={row.feature}
+                    onChange={e => updateRow(row.id, { feature: e.target.value })}
+                    aria-label="Feature"
+                  >
+                    {features.map(f => (
+                      <option key={f.name} value={f.name}>{f.name}</option>
+                    ))}
+                  </select>
 
-              <select
-                value={row.value}
-                onChange={e => updateRow(row.id, { value: e.target.value })}
-                aria-label="Value"
-              >
-                {(features.find(f => f.name === row.feature)?.values ?? []).map(v => (
-                  <option key={v} value={v}>{v}</option>
-                ))}
-              </select>
+                  <select
+                    value={row.value}
+                    onChange={e => updateRow(row.id, { value: e.target.value })}
+                    aria-label="Value"
+                  >
+                    {(features.find(f => f.name === row.feature)?.values ?? []).map(v => (
+                      <option key={v} value={v}>{v}</option>
+                    ))}
+                  </select>
 
-              <input
-                type="number"
-                min={0}
-                max={panelSize}
-                value={row.min}
-                onChange={e => updateRow(row.id, { min: parseInt(e.target.value, 10) || 0 })}
-                aria-label="Min"
-              />
+                  <input
+                    type="number"
+                    min={0}
+                    max={panelSize}
+                    value={row.min}
+                    onChange={e => updateRow(row.id, { min: parseInt(e.target.value, 10) || 0 })}
+                    aria-label="Min"
+                    aria-invalid={err ? true : undefined}
+                  />
 
-              <input
-                type="number"
-                min={0}
-                max={panelSize}
-                value={row.max}
-                onChange={e => updateRow(row.id, { max: parseInt(e.target.value, 10) || 0 })}
-                aria-label="Max"
-              />
+                  <input
+                    type="number"
+                    min={0}
+                    max={panelSize}
+                    value={row.max}
+                    onChange={e => updateRow(row.id, { max: parseInt(e.target.value, 10) || 0 })}
+                    aria-label="Max"
+                    aria-invalid={err ? true : undefined}
+                  />
 
-              <button
-                type="button"
-                className="btn btn-ghost btn-sm"
-                onClick={() => removeRow(row.id)}
-                aria-label="Remove"
-                style={{ padding: '7px 8px', color: 'var(--danger)' }}
-              >
-                <Trash2 size={14} />
-              </button>
-            </div>
-          ))}
+                  <button
+                    type="button"
+                    className="btn btn-ghost btn-sm"
+                    onClick={() => removeRow(row.id)}
+                    aria-label="Remove"
+                    style={{ padding: '7px 8px', color: 'var(--danger)' }}
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+                {err && (
+                  <p className="hint" role="alert" style={{ color: 'var(--danger)', marginTop: -2, marginBottom: 10 }}>
+                    {err}
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </>
       )}
 
@@ -201,7 +221,7 @@ export default function Quotas({ features, onDone, onBack }: Props) {
           disabled={!canContinue}
           onClick={() => onDone(panelSize, targets)}
         >
-          Run draw <ChevronRight size={16} />
+          Review draw <ChevronRight size={16} />
         </button>
       </div>
     </div>
