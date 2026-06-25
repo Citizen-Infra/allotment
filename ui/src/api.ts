@@ -76,6 +76,8 @@ export interface DrawAudit {
   input_hash: string;
   seed: string;
   panel_size: number;
+  accuracy_index: number;
+  closeness_index: number;
   [key: string]: unknown;
 }
 

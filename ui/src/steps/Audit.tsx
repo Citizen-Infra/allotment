@@ -10,6 +10,7 @@ interface Props {
 export default function Audit({ draw }: Props) {
   const { audit, selection } = draw;
   const [copied, setCopied] = useState(false);
+  const hasQuotas = Object.keys(draw.quota_fill).length > 0;
 
   // Plain-text audit record an auditor can copy out and re-run the draw with.
   function copyRecord() {
@@ -20,6 +21,12 @@ export default function Audit({ draw }: Props) {
       `Published seed: ${audit.seed}`,
       `Panel size:  ${audit.panel_size}`,
       `Selected:    ${selection.candidate_ids.length} candidates`,
+      ...(hasQuotas
+        ? [
+            `Accuracy index:  ${audit.accuracy_index}`,
+            `Closeness index: ${audit.closeness_index}`,
+          ]
+        : []),
     ];
     navigator.clipboard.writeText(lines.join('\n')).then(() => {
       setCopied(true);
@@ -109,6 +116,28 @@ export default function Audit({ draw }: Props) {
         </div>
       </div>
 
+      {/* Representativeness — how closely the panel matches the quota targets */}
+      {hasQuotas && (
+        <>
+          <h3 style={{ marginBottom: 4 }}>Representativeness</h3>
+          <p style={{ fontSize: 13, color: 'var(--slate-500)', marginBottom: 14 }}>
+            How closely the panel matches the centre of every quota band you set. 0 is a perfect match.
+          </p>
+          <div className="stat-grid">
+            <div className="stat-card">
+              <div className="stat-label">Accuracy index</div>
+              <div className="stat-value">{audit.accuracy_index}</div>
+              <div className="stat-sub">total seats away from target</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-label">Closeness index</div>
+              <div className="stat-value">{audit.closeness_index}</div>
+              <div className="stat-sub">large gaps weighted more heavily</div>
+            </div>
+          </div>
+        </>
+      )}
+
       {/* Realised probability histogram */}
       {probs.length > 0 && (
         <>
@@ -157,14 +186,14 @@ export default function Audit({ draw }: Props) {
 
       {/* Additional audit fields */}
       {Object.keys(audit)
-        .filter(k => !['input_hash', 'seed', 'panel_size'].includes(k))
+        .filter(k => !['input_hash', 'seed', 'panel_size', 'accuracy_index', 'closeness_index'].includes(k))
         .length > 0 && (
         <>
           <hr className="divider" />
           <h3 style={{ marginBottom: 12 }}>Additional audit data</h3>
           <div className="mono-block">
             {Object.entries(audit)
-              .filter(([k]) => !['input_hash', 'seed', 'panel_size'].includes(k))
+              .filter(([k]) => !['input_hash', 'seed', 'panel_size', 'accuracy_index', 'closeness_index'].includes(k))
               .map(([k, v]) => (
                 <div key={k} style={{ marginBottom: 4 }}>
                   <span style={{ color: 'var(--slate-500)' }}>{k}: </span>
