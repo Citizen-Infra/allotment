@@ -45,3 +45,10 @@ The schema is created on first boot by `create_all()` — there is no migration 
 - Build / deploy / HTTP logs and deployment history: Railway dashboard, or the Railway MCP (`get_logs`, `list_deployments`) with the IDs above.
 - Health check: `GET /` returns the SPA (200); `GET /api/...` without the bearer token returns 401.
 - Purge expired pools manually: run `python -m allotment.cli purge` in the service shell (the app does not schedule it automatically).
+
+## Database tuning (when it grows)
+
+Fine on Railway Postgres defaults while small (verified healthy 2026-06-25: ~8 MB, 3 tables, low load). Once the pool/draw tables hold real data:
+
+- `random_page_cost` is `4.0` (HDD default), but Railway runs on SSDs — set it to `1.1`–`2.0` so the planner prefers index scans: `ALTER SYSTEM SET random_page_cost = 1.5; SELECT pg_reload_conf();` (no restart).
+- `pg_stat_statements` is not installed, so there is no slow-query visibility. Enable it via the `use-railway` skill (`python3 scripts/enable-pg-stats.py --service Postgres`, brief restart), which unlocks `analyze-postgres.py` query analysis.
