@@ -9,11 +9,36 @@ interface Props {
   onBack: () => void;
 }
 
-/** Parse the header row of a CSV string (handles quoted fields). */
+/**
+ * Parse the header row of a CSV string. Tolerates \r\n line endings and
+ * RFC-4180-style quoted fields: a field wrapped in double quotes may contain
+ * commas, and a doubled quote ("") inside such a field is a literal quote.
+ */
 function parseCSVHeader(csv: string): string[] {
-  const firstLine = csv.split('\n')[0] ?? '';
-  // Simple split on comma — adequate for column names (no quoted commas expected)
-  return firstLine.split(',').map(c => c.trim().replace(/^"|"$/g, ''));
+  const firstLine = csv.split(/\r?\n/, 1)[0] ?? '';
+  const fields: string[] = [];
+  let cur = '';
+  let inQuotes = false;
+  for (let i = 0; i < firstLine.length; i++) {
+    const ch = firstLine[i];
+    if (inQuotes) {
+      if (ch === '"') {
+        if (firstLine[i + 1] === '"') { cur += '"'; i++; } // escaped quote
+        else inQuotes = false;
+      } else {
+        cur += ch;
+      }
+    } else if (ch === '"') {
+      inQuotes = true;
+    } else if (ch === ',') {
+      fields.push(cur);
+      cur = '';
+    } else {
+      cur += ch;
+    }
+  }
+  fields.push(cur);
+  return fields.map(c => c.trim());
 }
 
 export default function Pool({ token, assemblyId, onDone, onBack }: Props) {

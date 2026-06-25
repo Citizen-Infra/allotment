@@ -170,7 +170,7 @@ export default function Draw({ token, assemblyId, panelSize, candidateCount, tar
                     <div className="quota-bar">
                       <div
                         className={`quota-fill ${cls}`}
-                        style={{ width: `${pct}%` }}
+                        style={{ transform: `scaleX(${pct / 100})` }}
                         role="progressbar"
                         aria-valuenow={actual}
                         aria-valuemin={t.min}

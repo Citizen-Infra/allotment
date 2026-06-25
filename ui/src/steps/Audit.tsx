@@ -135,7 +135,6 @@ export default function Audit({ draw }: Props) {
                   height: `${(count / maxBucket) * 100}%`,
                   minHeight: count > 0 ? 4 : 2,
                   borderRadius: '3px 3px 0 0',
-                  transition: 'height 0.4s ease',
                   opacity: count > 0 ? 1 : 0.4,
                 }}
               />
