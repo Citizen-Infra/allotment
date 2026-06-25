@@ -9,7 +9,7 @@ Processed 2026-06-25. Relevance: directly informs Allotment's `selection_core` a
 - Explainer: https://bluedemocracy.pl/explainer-why-use-simulated-annealing/
 - Open data + scripts (10 case studies, comparison harness): https://osf.io/nszft/
 
-License/availability: Sortition Magic is a free ZIP download; data and scripts are open on OSF. Metrics and the evaluation function are trivial to port to Python; the R code itself is not directly reusable.
+License/availability: Sortition Magic is a free, **MIT-licensed** ZIP download (license stated in its ReadMe); data and scripts are open on OSF. Metrics and the evaluation function are trivial to port to Python; the R code itself is not directly reusable. The 8.6 source was inspected locally on 2026-06-25 and then deleted (IDE cruft + a third party's Geneva dataset; not for the public repo). Implementation specifics below are from that read.
 
 ## The core fork it exposes
 
@@ -27,6 +27,7 @@ Defined per draw, summed over every subcategory `s` (e.g. age 25-39), where `des
 - **Accuracy Index** = `sum_s | desired_s - actual_s |` — total seat deviation. 0 = perfect composition.
 - **Closeness Index** = `sum_s | desired_s - actual_s | ^ 1.6` — same deviations, but the 1.6 exponent penalizes a few large misses more than many small ones (so "4 seats off in one group" scores worse than "1 off in four groups"). Lower is better.
 - Their solver's evaluation function uses `^2`; the reporting index uses `^1.6` (a "moderate" penalty curve they chose deliberately).
+- Confirmed against the 8.6 source: `Accuracy = sum |value - count|` and `Closeness = sum |value - count|^1.6`. The optimizer minimizes `sum( priority * (count - value)^2 )`, where each category carries an optional **priority weight** (default 1) so some categories can be made to matter more.
 
 These are *reporting* numbers, independent of how the panel was drawn. Allotment currently surfaces the equality side (realised selection probabilities) but never quantifies how representative the drawn panel is.
 
@@ -45,9 +46,18 @@ These are *reporting* numbers, independent of how the panel was drawn. Allotment
 3. **UX critique of the quota model.** Requiring users to set min/max ranges pushes the hard problem onto the user. An optional "give target proportions, find the closest feasible composition" mode would suit the non-technical organizer. Idea, not a rewrite. → #20.
 4. **Positioning / prior art.** Name the fork in the design spec / README (leximin vs accuracy-first SA), showing Allotment's objective was chosen deliberately. Strengthens §16. → #21.
 
+## Implementation notes (Sortition Magic 8.6 source)
+
+Ground truth from reading the R script (`Simulated annealing 8.6 script.R`), now deleted:
+
+- **Input schema (categories file):** one row per `(category, feature)` with a target `value` (the required seat *count*, not a min/max range) and a `priority` weight (default 1). This is the concrete shape for an accuracy-first target-proportions mode (#20), and the priority weight is a capability Allotment's min/max quotas lack.
+- **Constraints are soft penalties, not hard rules:** a duplicate person, or (optionally) two people sharing a `HOUSEHOLD_ID`, returns a huge penalty (`99999999`) so the optimizer avoids them. Household de-duplication is a real feature Allotment does not have.
+- **Richer reporting menu** than accuracy/closeness alone: Gini index, standard deviation, a custom "Total Equality Index" (normalised sum of deviations from the mean selection count), inclusiveness (% of the pool drawn at least once), unique-panel count, geometric mean, median, and a ten-percent-interval breakdown. A useful menu when expanding the Audit step (#18).
+- **Reproducibility:** GenSA *is* seedable (`SA_seed`), so a single draw can be reproducible — but the multi-draw loop reseeds with a fresh random initial sample each draw, and reproducing any draw needs the seed *plus* the initial state *plus* the exact GenSA version. More fragile than the LP's `(input_hash, seed)`.
+
 ## What NOT to do
 
-Do not adopt simulated annealing as the solver. Allotment's exact LP (PuLP/CBC) is deterministic and reproducible, which underpins the whole "re-run gives a byte-identical result" verifiability claim (#13). SA is stochastic and would weaken that guarantee for no objective Allotment is trying to optimize.
+Do not adopt simulated annealing as the solver. Allotment's exact LP (PuLP/CBC) is deterministic and reproducible, which underpins the whole "re-run gives a byte-identical result" verifiability claim (#13). GenSA is seedable, but reproducing a draw depends on the seed plus the random initial state plus the exact solver version, which is more fragile than the LP and would complicate verifiability for no objective Allotment is trying to optimize.
 
 ## Related
 
