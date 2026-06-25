@@ -41,9 +41,9 @@ These are *reporting* numbers, independent of how the panel was drawn. Allotment
 ## Takeaways for Allotment (ranked)
 
 1. **Add Accuracy + Closeness indices to the Audit step.** Highest value, low effort, algorithm-agnostic. Concrete representativeness number to publish next to seed/hash. Fits the "show the work as reassurance" principle. → tracked as #18.
-2. **Use the OSF corpus as an eval/benchmark.** 10 case studies + Panelot comparison; since Allotment is in Panelot's family, running them validates `selection_core` and benchmarks against published numbers.
-3. **UX critique of the quota model.** Requiring users to set min/max ranges pushes the hard problem onto the user. An optional "give target proportions, find the closest feasible composition" mode would suit the non-technical organizer. Idea, not a rewrite.
-4. **Positioning / prior art.** Name the fork in the design spec / README (leximin vs accuracy-first SA), showing Allotment's objective was chosen deliberately. Strengthens §16.
+2. **Use the OSF corpus as an eval/benchmark.** 10 case studies + Panelot comparison; since Allotment is in Panelot's family, running them validates `selection_core` and benchmarks against published numbers. → #19.
+3. **UX critique of the quota model.** Requiring users to set min/max ranges pushes the hard problem onto the user. An optional "give target proportions, find the closest feasible composition" mode would suit the non-technical organizer. Idea, not a rewrite. → #20.
+4. **Positioning / prior art.** Name the fork in the design spec / README (leximin vs accuracy-first SA), showing Allotment's objective was chosen deliberately. Strengthens §16. → #21.
 
 ## What NOT to do
 
