@@ -24,6 +24,16 @@ def test_pool_roundtrip_is_encrypted_at_rest(repo, sample_pool):
     assert "c0@example.org" not in raw
 
 
+def test_get_assembly(repo):
+    a = repo.create_assembly("Climate Assembly", "What should we do about emissions?")
+    repo.session.commit()
+    loaded = repo.get_assembly(a.id)
+    assert loaded is not None
+    assert loaded.name == "Climate Assembly"
+    assert loaded.question == "What should we do about emissions?"
+    assert repo.get_assembly("does-not-exist") is None
+
+
 def test_purge_expired(repo, sample_pool):
     a = repo.create_assembly("Old", "q")
     repo.save_pool(a.id, sample_pool, purge_after=datetime.now(UTC) - timedelta(days=1))
