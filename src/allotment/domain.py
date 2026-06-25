@@ -62,4 +62,6 @@ class AuditRecord(BaseModel):
     seed: int
     panel_size: int
     quota_fill: dict[str, int]
+    accuracy_index: float
+    closeness_index: float
     created_at: datetime
