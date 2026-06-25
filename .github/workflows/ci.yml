@@ -12,6 +12,22 @@ concurrency:
 jobs:
   checks:
     runs-on: ubuntu-latest
+    services:
+      # Postgres 18 to match the production engine (Railway runs 18.x), so the
+      # suite is exercised on the real backend, not just SQLite.
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: allotment
+          POSTGRES_PASSWORD: allotment
+          POSTGRES_DB: allotment
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U allotment"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v5
 
@@ -30,5 +46,10 @@ jobs:
       - name: Type-check (mypy)
         run: mypy
 
-      - name: Test (pytest)
+      - name: Test (pytest, sqlite)
+        run: pytest
+
+      - name: Test (pytest, postgres)
+        env:
+          ALLOTMENT_DATABASE_URL: postgresql+psycopg://allotment:allotment@localhost:5432/allotment
         run: pytest
