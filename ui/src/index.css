@@ -132,7 +132,6 @@ p  { color: var(--slate-700); }
   height: 3px;
   background: var(--accent);
   border-radius: 2px 2px 0 0;
-  animation: pulse-line 2s ease-in-out infinite;
 }
 .ballot-step.upcoming .bs-num {
   background: transparent;
@@ -169,11 +168,6 @@ p  { color: var(--slate-700); }
 }
 .ballot-step.done .bs-label,
 .ballot-step.active .bs-label { color: var(--accent-dark); }
-
-@keyframes pulse-line {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.4; }
-}
 
 /* ── Card ──────────────────────────────────────────────────── */
 .card {
@@ -349,7 +343,9 @@ tbody tr:hover td { background: var(--surface); }
 .quota-label  { font-size: 13px; font-weight: 500; color: var(--slate-700); }
 .quota-nums   { font-size: 12px; color: var(--slate-500); }
 .quota-bar    { height: 6px; background: var(--slate-200); border-radius: 99px; overflow: hidden; }
-.quota-fill   { height: 100%; border-radius: 99px; transition: width 0.4s ease; }
+/* Fill is always full width and revealed via scaleX (compositor-only, no layout
+   animation); the track's overflow:hidden + radius clips the squared end. */
+.quota-fill   { height: 100%; width: 100%; transform-origin: left center; transition: transform 0.4s ease; }
 .quota-fill.ok   { background: var(--success); }
 .quota-fill.warn { background: var(--warn); }
 .quota-fill.over { background: var(--danger); }
