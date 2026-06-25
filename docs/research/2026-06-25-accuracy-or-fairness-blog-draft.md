@@ -1,5 +1,5 @@
 ---
-status: DRAFT — CIBC blog, pending publication to Substack
+status: DRAFT — CIBC blog, pending publication to Substack (#22)
 source-thinking: docs/research/2026-06-25-blue-democracy-simulated-annealing.md
 date: 2026-06-25
 ---
