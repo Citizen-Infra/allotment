@@ -59,6 +59,26 @@ Ground truth from reading the R script (`Simulated annealing 8.6 script.R`), now
 
 Do not adopt simulated annealing as the solver. Allotment's exact LP (PuLP/CBC) is deterministic and reproducible, which underpins the whole "re-run gives a byte-identical result" verifiability claim (#13). GenSA is seedable, but reproducing a draw depends on the seed plus the random initial state plus the exact solver version, which is more fragile than the LP and would complicate verifiability for no objective Allotment is trying to optimize.
 
+## Should Allotment offer both approaches? (architecture decision)
+
+No, and "offer both" is the wrong frame. The draw has two **separable layers**:
+
+1. **Composition** — the panel's demographic mix (accuracy: deviation from target proportions).
+2. **Fairness of chances** — given an acceptable composition, who is selected and with what probability (leximin: maximize the minimum individual selection probability).
+
+The two methods each optimize one layer and neglect the other. Leximin makes composition a *constraint* (min/max ranges) and fairness the *objective*. Accuracy-first SA makes composition the *objective* and lets fairness emerge from stochasticity (hence Panelot's better Gini). They are layers, not rival algorithms, so shipping both would mean shipping two tools that each do half the job and ask the organiser which half to sacrifice.
+
+**No second solver is needed.** Stratified selection with linear quotas is an LP, exactly solvable at these scales; SA buys nothing and would fork the reproducibility story (#13) into a second, fragile audit path. The only genuine architectural fork is the **infeasibility contract**: ours raises (422, never relaxes); accuracy-first always returns the closest panel. Closest-fit is a soft-constraint / goal-programming LP objective (still an LP, not SA), and it is exactly what collapsed inclusiveness in the Lausanne case, so it is a deliberate opt-in, not a default.
+
+**Synthesis — one engine, lexicographic pipeline:**
+
+1. Take target proportions from the user (accuracy-first ergonomics; #20).
+2. Stage 1: minimise composition deviation (the Closeness number; #18).
+3. Stage 2: among panels within a tolerance of that minimum, run leximin to equalise chances.
+4. Expose the tolerance as one honest dial: tight = maximum accuracy, fewer feasible panels, lower inclusiveness; loose = more inclusiveness, looser composition.
+
+This delivers accuracy-first input, graceful degradation, and fairness-first chances in one reproducible LP, with the accuracy-vs-inclusiveness tension on a single defensible slider rather than hidden behind a mode switch. It is #6 (full leximin) and #20 (target input) converging, not two features. Ours is not simply "better"; it optimises the layer that is harder to bolt on later (fairness) and the one that is reproducible.
+
 ## Related
 
 Allotment issues #6 (full leximin), #13 (verifiable lottery). README §16 prior-art.
