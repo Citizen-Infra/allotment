@@ -316,6 +316,11 @@ tbody tr:hover td { background: var(--surface); }
   border-radius: var(--radius-sm); padding: 2px 7px;
   color: var(--ink); word-break: break-all; display: inline-block;
 }
+.audit-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 10px;
+}
+.audit-head h3 { margin: 0; }
 .mono-block {
   font-family: 'JetBrains Mono', 'Fira Mono', ui-monospace, monospace;
   font-size: 13px;
@@ -437,6 +442,54 @@ tbody tr:hover td { background: var(--surface); }
   border-top-color: var(--accent);
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Disclosure (how-it-works / verify panels) ───────────────── */
+.disclosure {
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius);
+  background: var(--surface);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+.disclosure-info {
+  border-color: oklch(0.86 0.05 150);
+  background: var(--accent-dim);
+}
+.disclosure-summary {
+  display: flex; align-items: center; gap: 9px;
+  padding: 13px 16px;
+  font-size: 14px; font-weight: 600;
+  color: var(--slate-700);
+  cursor: pointer; user-select: none;
+  list-style: none;
+  transition: background 0.15s;
+}
+.disclosure-summary::-webkit-details-marker { display: none; }
+.disclosure-summary:hover { background: oklch(0.95 0.012 80); }
+.disclosure-info .disclosure-summary { color: var(--accent-dark); }
+.disclosure-info .disclosure-summary:hover { background: oklch(0.93 0.04 150); }
+.disclosure-icon { display: inline-flex; color: var(--accent); flex-shrink: 0; }
+.disclosure-summary:focus-visible {
+  outline: none;
+  box-shadow: inset var(--focus-ring);
+}
+.disclosure-chev {
+  margin-left: auto;
+  color: var(--slate-400);
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+.disclosure[open] .disclosure-chev { transform: rotate(180deg); }
+.disclosure-body {
+  padding: 2px 16px 16px;
+  font-size: 14px; color: var(--slate-700); line-height: 1.6;
+}
+.disclosure-body p { margin-bottom: 10px; color: var(--slate-700); }
+.disclosure-body p:last-child { margin-bottom: 0; }
+.disclosure-body ol { margin: 0 0 4px; padding-left: 18px; }
+.disclosure-body li { margin-bottom: 8px; }
+.disclosure-body li:last-child { margin-bottom: 0; }
+.disclosure-body strong { color: var(--ink); font-weight: 600; }
 
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 600px) {
