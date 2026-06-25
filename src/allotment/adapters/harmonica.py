@@ -19,5 +19,6 @@ class HarmonicaAdapter:
         )
         resp.raise_for_status()
         body = resp.json()
+        # The live API returns 201 with `id` + `join_url` (not `url`).
         return ProvisionResult(kind="session", session_id=body["id"],
-                               join_links={"all": body["url"]})
+                               join_links={"all": body["join_url"]})

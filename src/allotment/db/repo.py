@@ -29,6 +29,9 @@ class AssemblyRepo:
         self.session.flush()
         return row
 
+    def get_assembly(self, assembly_id: str) -> AssemblyRow | None:
+        return self.session.get(AssemblyRow, assembly_id)
+
     def save_pool(self, assembly_id: str, pool: Pool, purge_after: datetime) -> None:
         blob = encrypt(json.dumps([c.model_dump() for c in pool.candidates]))
         self.session.merge(PoolRow(

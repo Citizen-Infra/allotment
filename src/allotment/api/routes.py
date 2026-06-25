@@ -88,6 +88,14 @@ def handoff(draw_id: str, body: Handoff, repo: AssemblyRepo = Depends(_repo)) ->
         return CsvJsonExport(body.fmt).provision(pool, selection, {}).model_dump()  # type: ignore[arg-type]
     if body.target == "harmonica":
         s = get_settings()
+        assembly = repo.get_assembly(row.assembly_id)
+        # Harmonica requires topic + goal. Default them from the assembly's
+        # name + question; an explicit session_config still overrides.
+        cfg: dict[str, Any] = {
+            "topic": assembly.name if assembly else "",
+            "goal": assembly.question if assembly else "",
+            **body.session_config,
+        }
         adapter = HarmonicaAdapter(s.harmonica_base_url, s.harmonica_api_key)
-        return adapter.provision(pool, selection, body.session_config).model_dump()
+        return adapter.provision(pool, selection, cfg).model_dump()
     raise HTTPException(400, detail="unknown target")
