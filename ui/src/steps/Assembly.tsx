@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import { ShieldCheck, AlertCircle } from 'lucide-react';
+import { ShieldCheck, AlertCircle, HelpCircle } from 'lucide-react';
 import { createAssembly } from '../api';
+import Disclosure from '../components/Disclosure';
 
 interface Props {
   onDone: (assemblyId: string, token: string) => void;
@@ -37,6 +38,34 @@ export default function Assembly({ onDone }: Props) {
         Enter your operator bearer token and describe the assembly. The token
         is held in browser memory only and never stored.
       </p>
+
+      <Disclosure
+        variant="info"
+        defaultOpen
+        persistKey="allotment.intro"
+        icon={<HelpCircle size={16} />}
+        summary="New to sortition? How this draw works"
+      >
+        <p>
+          Sortition fills a citizens' panel by fair lottery instead of by
+          election or sign-up. It gives people who would never put themselves
+          forward an equal chance to take part. You will move through five steps:
+        </p>
+        <ol>
+          <li>Name the assembly and the question it will decide.</li>
+          <li>Upload your pool of candidates.</li>
+          <li>Set quotas so the panel mirrors the population (age, region, and so on).</li>
+          <li>Run the draw.</li>
+          <li>Hand the selected panel to a deliberation tool, or export it.</li>
+        </ol>
+        <p>
+          The draw uses a fixed random <strong>seed</strong> and a method that
+          gives every eligible candidate the fairest possible chance of
+          selection. Because the seed and the inputs are recorded, anyone can
+          re-run the same draw and check it afterwards. The whole thing takes
+          about five minutes.
+        </p>
+      </Disclosure>
 
       {error && (
         <div className="alert alert-error" role="alert">
