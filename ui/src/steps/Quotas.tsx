@@ -87,7 +87,7 @@ export default function Quotas({ features, onDone, onBack }: Props) {
       </p>
 
       {/* Panel size + preset */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 24 }}>
+      <div className="form-grid" style={{ marginBottom: 24 }}>
         <div className="field" style={{ marginBottom: 0 }}>
           <label htmlFor="panelSize">Panel size</label>
           <input
@@ -120,7 +120,7 @@ export default function Quotas({ features, onDone, onBack }: Props) {
       <hr className="divider" />
 
       {/* Quota targets */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+      <div className="section-head">
         <h3>Quota targets</h3>
         <button type="button" className="btn btn-secondary btn-sm" onClick={addRow}>
           <Plus size={14} /> Add target
@@ -136,20 +136,13 @@ export default function Quotas({ features, onDone, onBack }: Props) {
 
       {rows.length > 0 && (
         <>
-          {/* Header row labels */}
-          <div className="quota-target-row" style={{ marginBottom: 4 }}>
-            <span className="field-label">Feature</span>
-            <span className="field-label">Value</span>
-            <span className="field-label">Min</span>
-            <span className="field-label">Max</span>
-            <span />
-          </div>
-
           {rows.map(row => {
             const err = rowError(row);
             return (
               <div key={row.id}>
                 <div className="quota-target-row">
+                  <label>
+                    <span className="field-label">Feature</span>
                   <select
                     value={row.feature}
                     onChange={e => updateRow(row.id, { feature: e.target.value })}
@@ -159,7 +152,9 @@ export default function Quotas({ features, onDone, onBack }: Props) {
                       <option key={f.name} value={f.name}>{f.name}</option>
                     ))}
                   </select>
-
+                  </label>
+                  <label>
+                    <span className="field-label">Value</span>
                   <select
                     value={row.value}
                     onChange={e => updateRow(row.id, { value: e.target.value })}
@@ -169,7 +164,9 @@ export default function Quotas({ features, onDone, onBack }: Props) {
                       <option key={v} value={v}>{v}</option>
                     ))}
                   </select>
-
+                  </label>
+                  <label>
+                    <span className="field-label">Min</span>
                   <input
                     type="number"
                     min={0}
@@ -179,7 +176,9 @@ export default function Quotas({ features, onDone, onBack }: Props) {
                     aria-label="Min"
                     aria-invalid={err ? true : undefined}
                   />
-
+                  </label>
+                  <label>
+                    <span className="field-label">Max</span>
                   <input
                     type="number"
                     min={0}
@@ -189,6 +188,7 @@ export default function Quotas({ features, onDone, onBack }: Props) {
                     aria-label="Max"
                     aria-invalid={err ? true : undefined}
                   />
+                  </label>
 
                   <button
                     type="button"

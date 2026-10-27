@@ -136,7 +136,12 @@ export default function Pool({ token, assemblyId, onDone, onBack }: Props) {
           onDrop={handleDrop}
           role="button"
           tabIndex={0}
-          onKeyDown={e => e.key === 'Enter' && fileRef.current?.click()}
+          onKeyDown={e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              fileRef.current?.click();
+            }
+          }}
         >
           <input
             ref={fileRef}
@@ -148,7 +153,7 @@ export default function Pool({ token, assemblyId, onDone, onBack }: Props) {
             <Upload size={32} />
           </div>
           <p style={{ fontWeight: 600, marginBottom: 4 }}>Drop a CSV here or click to browse</p>
-          <p style={{ fontSize: 13, color: 'var(--slate-500)' }}>
+            <p className="hint">
             First row must be column headers.
           </p>
         </div>
@@ -160,7 +165,7 @@ export default function Pool({ token, assemblyId, onDone, onBack }: Props) {
           <label htmlFor="csvPaste">Or paste CSV text</label>
           <textarea
             id="csvPaste"
-            style={{ minHeight: 120, fontFamily: 'ui-monospace, monospace', fontSize: 13 }}
+            style={{ minHeight: 120, fontFamily: 'var(--cibc-font-mono)' }}
             placeholder="id,age_band,gender,region&#10;C001,25-34,F,North&#10;C002,35-44,M,South"
             onChange={e => e.target.value && loadCSV(e.target.value)}
           />
@@ -185,7 +190,8 @@ export default function Pool({ token, assemblyId, onDone, onBack }: Props) {
                 <button
                   key={col}
                   type="button"
-                  className={`tag${featureCols.has(col) ? ' selected' : ''}`}
+                   className={`tag${featureCols.has(col) ? ' selected' : ''}`}
+                   aria-pressed={featureCols.has(col)}
                   onClick={() => toggleFeature(col)}
                 >
                   {col}
@@ -194,7 +200,7 @@ export default function Pool({ token, assemblyId, onDone, onBack }: Props) {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div className="form-grid">
             <div className="field">
               <label htmlFor="idCol">ID column</label>
               <select

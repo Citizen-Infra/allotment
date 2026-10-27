@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-27T01:14:28Z",
+  "title": "Design System: Allotment — Open Index",
+  "extensions": {
+    "colorMeta": {
+      "page": {"role": "secondary", "displayName": "Civic Yellow", "tonalRamp": ["oklch(0.150 0.1797 109.41)", "oklch(0.264 0.1797 109.41)", "oklch(0.379 0.1797 109.41)", "oklch(0.493 0.1797 109.41)", "oklch(0.607 0.1797 109.41)", "oklch(0.721 0.1797 109.41)", "oklch(0.836 0.1797 109.41)", "oklch(0.950 0.1797 109.41)"]},
+      "surface": {"role": "neutral", "displayName": "Working White", "tonalRamp": ["oklch(0.150 0.0000 0.00)", "oklch(0.264 0.0000 0.00)", "oklch(0.379 0.0000 0.00)", "oklch(0.493 0.0000 0.00)", "oklch(0.607 0.0000 0.00)", "oklch(0.721 0.0000 0.00)", "oklch(0.836 0.0000 0.00)", "oklch(0.950 0.0000 0.00)"]},
+      "surface-subtle": {"role": "neutral", "displayName": "Pale Paper", "tonalRamp": ["oklch(0.150 0.0530 105.03)", "oklch(0.264 0.0530 105.03)", "oklch(0.379 0.0530 105.03)", "oklch(0.493 0.0530 105.03)", "oklch(0.607 0.0530 105.03)", "oklch(0.721 0.0530 105.03)", "oklch(0.836 0.0530 105.03)", "oklch(0.950 0.0530 105.03)"]},
+      "ink": {"role": "neutral", "displayName": "Document Ink", "tonalRamp": ["oklch(0.150 0.0483 258.68)", "oklch(0.264 0.0483 258.68)", "oklch(0.379 0.0483 258.68)", "oklch(0.493 0.0483 258.68)", "oklch(0.607 0.0483 258.68)", "oklch(0.721 0.0483 258.68)", "oklch(0.836 0.0483 258.68)", "oklch(0.950 0.0483 258.68)"]},
+      "text-secondary": {"role": "neutral", "displayName": "Reading Slate", "tonalRamp": ["oklch(0.150 0.0398 249.11)", "oklch(0.264 0.0398 249.11)", "oklch(0.379 0.0398 249.11)", "oklch(0.493 0.0398 249.11)", "oklch(0.607 0.0398 249.11)", "oklch(0.721 0.0398 249.11)", "oklch(0.836 0.0398 249.11)", "oklch(0.950 0.0398 249.11)"]},
+      "text-muted": {"role": "neutral", "displayName": "Caption Slate", "tonalRamp": ["oklch(0.150 0.0374 254.55)", "oklch(0.264 0.0374 254.55)", "oklch(0.379 0.0374 254.55)", "oklch(0.493 0.0374 254.55)", "oklch(0.607 0.0374 254.55)", "oklch(0.721 0.0374 254.55)", "oklch(0.836 0.0374 254.55)", "oklch(0.950 0.0374 254.55)"]},
+      "border": {"role": "neutral", "displayName": "Paper Divider", "tonalRamp": ["oklch(0.150 0.0806 112.72)", "oklch(0.264 0.0806 112.72)", "oklch(0.379 0.0806 112.72)", "oklch(0.493 0.0806 112.72)", "oklch(0.607 0.0806 112.72)", "oklch(0.721 0.0806 112.72)", "oklch(0.836 0.0806 112.72)", "oklch(0.950 0.0806 112.72)"]},
+      "control-border": {"role": "neutral", "displayName": "Control Slate", "tonalRamp": ["oklch(0.150 0.0408 251.19)", "oklch(0.264 0.0408 251.19)", "oklch(0.379 0.0408 251.19)", "oklch(0.493 0.0408 251.19)", "oklch(0.607 0.0408 251.19)", "oklch(0.721 0.0408 251.19)", "oklch(0.836 0.0408 251.19)", "oklch(0.950 0.0408 251.19)"]},
+      "action": {"role": "primary", "displayName": "Index Blue", "tonalRamp": ["oklch(0.150 0.2528 266.74)", "oklch(0.264 0.2528 266.74)", "oklch(0.379 0.2528 266.74)", "oklch(0.493 0.2528 266.74)", "oklch(0.607 0.2528 266.74)", "oklch(0.721 0.2528 266.74)", "oklch(0.836 0.2528 266.74)", "oklch(0.950 0.2528 266.74)"]},
+      "action-hover": {"role": "primary", "displayName": "Index Blue Hover", "tonalRamp": ["oklch(0.150 0.2306 266.33)", "oklch(0.264 0.2306 266.33)", "oklch(0.379 0.2306 266.33)", "oklch(0.493 0.2306 266.33)", "oklch(0.607 0.2306 266.33)", "oklch(0.721 0.2306 266.33)", "oklch(0.836 0.2306 266.33)", "oklch(0.950 0.2306 266.33)"]},
+      "action-active": {"role": "primary", "displayName": "Index Blue Pressed", "tonalRamp": ["oklch(0.150 0.1796 266.71)", "oklch(0.264 0.1796 266.71)", "oklch(0.379 0.1796 266.71)", "oklch(0.493 0.1796 266.71)", "oklch(0.607 0.1796 266.71)", "oklch(0.721 0.1796 266.71)", "oklch(0.836 0.1796 266.71)", "oklch(0.950 0.1796 266.71)"]},
+      "selected": {"role": "primary", "displayName": "Selection Wash", "tonalRamp": ["oklch(0.150 0.0318 274.12)", "oklch(0.264 0.0318 274.12)", "oklch(0.379 0.0318 274.12)", "oklch(0.493 0.0318 274.12)", "oklch(0.607 0.0318 274.12)", "oklch(0.721 0.0318 274.12)", "oklch(0.836 0.0318 274.12)", "oklch(0.950 0.0318 274.12)"]},
+      "disabled": {"role": "neutral", "displayName": "Disabled Paper", "tonalRamp": ["oklch(0.150 0.0409 110.19)", "oklch(0.264 0.0409 110.19)", "oklch(0.379 0.0409 110.19)", "oklch(0.493 0.0409 110.19)", "oklch(0.607 0.0409 110.19)", "oklch(0.721 0.0409 110.19)", "oklch(0.836 0.0409 110.19)", "oklch(0.950 0.0409 110.19)"]},
+      "success": {"displayName": "Success Green", "tonalRamp": ["oklch(0.150 0.0785 160.11)", "oklch(0.264 0.0785 160.11)", "oklch(0.379 0.0785 160.11)", "oklch(0.493 0.0785 160.11)", "oklch(0.607 0.0785 160.11)", "oklch(0.721 0.0785 160.11)", "oklch(0.836 0.0785 160.11)", "oklch(0.950 0.0785 160.11)"]},
+      "success-surface": {"displayName": "Success Surface", "tonalRamp": ["oklch(0.150 0.0191 162.93)", "oklch(0.264 0.0191 162.93)", "oklch(0.379 0.0191 162.93)", "oklch(0.493 0.0191 162.93)", "oklch(0.607 0.0191 162.93)", "oklch(0.721 0.0191 162.93)", "oklch(0.836 0.0191 162.93)", "oklch(0.950 0.0191 162.93)"]},
+      "success-border": {"displayName": "Success Border", "tonalRamp": ["oklch(0.150 0.0809 159.78)", "oklch(0.264 0.0809 159.78)", "oklch(0.379 0.0809 159.78)", "oklch(0.493 0.0809 159.78)", "oklch(0.607 0.0809 159.78)", "oklch(0.721 0.0809 159.78)", "oklch(0.836 0.0809 159.78)", "oklch(0.950 0.0809 159.78)"]},
+      "warning": {"displayName": "Warning Amber", "tonalRamp": ["oklch(0.150 0.0946 66.86)", "oklch(0.264 0.0946 66.86)", "oklch(0.379 0.0946 66.86)", "oklch(0.493 0.0946 66.86)", "oklch(0.607 0.0946 66.86)", "oklch(0.721 0.0946 66.86)", "oklch(0.836 0.0946 66.86)", "oklch(0.950 0.0946 66.86)"]},
+      "warning-surface": {"displayName": "Warning Surface", "tonalRamp": ["oklch(0.150 0.0468 88.29)", "oklch(0.264 0.0468 88.29)", "oklch(0.379 0.0468 88.29)", "oklch(0.493 0.0468 88.29)", "oklch(0.607 0.0468 88.29)", "oklch(0.721 0.0468 88.29)", "oklch(0.836 0.0468 88.29)", "oklch(0.950 0.0468 88.29)"]},
+      "warning-border": {"displayName": "Warning Border", "tonalRamp": ["oklch(0.150 0.1180 74.68)", "oklch(0.264 0.1180 74.68)", "oklch(0.379 0.1180 74.68)", "oklch(0.493 0.1180 74.68)", "oklch(0.607 0.1180 74.68)", "oklch(0.721 0.1180 74.68)", "oklch(0.836 0.1180 74.68)", "oklch(0.950 0.1180 74.68)"]},
+      "danger": {"displayName": "Danger Red", "tonalRamp": ["oklch(0.150 0.1493 21.22)", "oklch(0.264 0.1493 21.22)", "oklch(0.379 0.1493 21.22)", "oklch(0.493 0.1493 21.22)", "oklch(0.607 0.1493 21.22)", "oklch(0.721 0.1493 21.22)", "oklch(0.836 0.1493 21.22)", "oklch(0.950 0.1493 21.22)"]},
+      "danger-surface": {"displayName": "Danger Surface", "tonalRamp": ["oklch(0.150 0.0219 17.55)", "oklch(0.264 0.0219 17.55)", "oklch(0.379 0.0219 17.55)", "oklch(0.493 0.0219 17.55)", "oklch(0.607 0.0219 17.55)", "oklch(0.721 0.0219 17.55)", "oklch(0.836 0.0219 17.55)", "oklch(0.950 0.0219 17.55)"]},
+      "danger-border": {"displayName": "Danger Border", "tonalRamp": ["oklch(0.150 0.1554 17.52)", "oklch(0.264 0.1554 17.52)", "oklch(0.379 0.1554 17.52)", "oklch(0.493 0.1554 17.52)", "oklch(0.607 0.1554 17.52)", "oklch(0.721 0.1554 17.52)", "oklch(0.836 0.1554 17.52)", "oklch(0.950 0.1554 17.52)"]},
+      "info": {"displayName": "Information Blue", "tonalRamp": ["oklch(0.150 0.0978 251.81)", "oklch(0.264 0.0978 251.81)", "oklch(0.379 0.0978 251.81)", "oklch(0.493 0.0978 251.81)", "oklch(0.607 0.0978 251.81)", "oklch(0.721 0.0978 251.81)", "oklch(0.836 0.0978 251.81)", "oklch(0.950 0.0978 251.81)"]},
+      "info-surface": {"displayName": "Information Surface", "tonalRamp": ["oklch(0.150 0.0177 253.34)", "oklch(0.264 0.0177 253.34)", "oklch(0.379 0.0177 253.34)", "oklch(0.493 0.0177 253.34)", "oklch(0.607 0.0177 253.34)", "oklch(0.721 0.0177 253.34)", "oklch(0.836 0.0177 253.34)", "oklch(0.950 0.0177 253.34)"]},
+      "info-border": {"displayName": "Information Border", "tonalRamp": ["oklch(0.150 0.0888 252.67)", "oklch(0.264 0.0888 252.67)", "oklch(0.379 0.0888 252.67)", "oklch(0.493 0.0888 252.67)", "oklch(0.607 0.0888 252.67)", "oklch(0.721 0.0888 252.67)", "oklch(0.836 0.0888 252.67)", "oklch(0.950 0.0888 252.67)"]},
+      "data-empty": {"displayName": "Empty Track", "tonalRamp": ["oklch(0.150 0.0102 228.89)", "oklch(0.264 0.0102 228.89)", "oklch(0.379 0.0102 228.89)", "oklch(0.493 0.0102 228.89)", "oklch(0.607 0.0102 228.89)", "oklch(0.721 0.0102 228.89)", "oklch(0.836 0.0102 228.89)", "oklch(0.950 0.0102 228.89)"]},
+      "data-high": {"displayName": "Distribution Teal", "tonalRamp": ["oklch(0.150 0.0783 222.56)", "oklch(0.264 0.0783 222.56)", "oklch(0.379 0.0783 222.56)", "oklch(0.493 0.0783 222.56)", "oklch(0.607 0.0783 222.56)", "oklch(0.721 0.0783 222.56)", "oklch(0.836 0.0783 222.56)", "oklch(0.950 0.0783 222.56)"]}
+    },
+    "typographyMeta": {
+      "wordmark": { "displayName": "Product wordmark", "purpose": "Allotment product heading; locally served Public Sans." },
+      "headline": { "displayName": "Step headline", "purpose": "Step titles; stat values share its size, not its compact heading leading." },
+      "title": { "displayName": "Section title", "purpose": "Subsections within the working surface." },
+      "body": { "displayName": "Reading body", "purpose": "Explanations and descriptions, with a 68ch reading measure." },
+      "label": { "displayName": "UI label", "purpose": "Labels and buttons; fields and tags use regular weight, progress labels bold." },
+      "caption": { "displayName": "Readable caption", "purpose": "Hints, progress-state descriptions and supporting figures, never microtype." },
+      "record": { "displayName": "Reproducibility value", "purpose": "Complete wrapping hashes, seeds and IDs in the platform monospace stack." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "fast", "value": "120ms", "purpose": "Button backgrounds and disclosure chevrons; zero under reduced motion." },
+      { "name": "slow", "value": "240ms", "purpose": "Quota-fill transform; zero under reduced motion." },
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Quota-fill transition easing." },
+      { "name": "busy-spin", "value": "0.7s linear infinite", "purpose": "Busy spinner only; disabled under reduced motion." }
+    ],
+    "breakpoints": [
+      { "name": "stacked", "value": "760px" },
+      { "name": "narrow", "value": "360px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid blue action; the success-named action variant shares this treatment.",
+      "html": "<button class=\"ds-primary\" type=\"button\">Review draw</button>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:var(--cibc-control-height);max-width:100%;padding:.75rem 1.25rem;border:1px solid transparent;border-radius:var(--cibc-radius-control);font-family:var(--cibc-font-sans);font-size:var(--cibc-text-ui);font-weight:600;line-height:var(--cibc-leading-ui);text-align:center;background:var(--cibc-color-action);color:var(--cibc-color-on-action);cursor:pointer;transition:background-color var(--cibc-duration-fast)}.ds-primary:hover:not(:disabled){background:var(--cibc-color-action-hover)}.ds-primary:active:not(:disabled){background:var(--cibc-color-action-active)}.ds-primary:focus-visible{outline:var(--cibc-focus-width) solid var(--cibc-color-focus);outline-offset:var(--cibc-focus-offset)}.ds-primary:disabled{background:var(--cibc-color-disabled);color:var(--cibc-color-on-disabled);cursor:not-allowed}@media(max-width:760px){.ds-primary{min-height:var(--cibc-control-touch)}}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "name": "Secondary action",
+      "kind": "button",
+      "refersTo": "button-secondary-compact",
+      "description": "Bordered working-surface control; copy actions use compact sizing.",
+      "html": "<button class=\"ds-secondary\" type=\"button\">Copy record</button>",
+      "css": ".ds-secondary{display:inline-flex;align-items:center;justify-content:center;min-height:var(--cibc-control-compact);max-width:100%;padding:.5rem .75rem;border:1px solid var(--cibc-color-control-border);border-radius:var(--cibc-radius-control);font-family:var(--cibc-font-sans);font-size:var(--cibc-text-ui);font-weight:600;line-height:var(--cibc-leading-ui);background:var(--cibc-color-surface);color:var(--cibc-color-text-secondary);cursor:pointer;transition:background-color var(--cibc-duration-fast)}.ds-secondary:hover:not(:disabled){background:var(--cibc-color-selected)}.ds-secondary:focus-visible{outline:var(--cibc-focus-width) solid var(--cibc-color-focus);outline-offset:var(--cibc-focus-offset)}.ds-secondary:disabled{background:var(--cibc-color-disabled);color:var(--cibc-color-on-disabled);border-color:transparent;cursor:not-allowed}@media(max-width:760px){.ds-secondary{min-height:var(--cibc-control-touch)}}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+    },
+    {
+      "name": "Ghost action",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Quiet navigation action with the same readable target and focus treatment.",
+      "html": "<button class=\"ds-ghost\" type=\"button\">Back</button>",
+      "css": ".ds-ghost{display:inline-flex;align-items:center;justify-content:center;min-height:var(--cibc-control-height);max-width:100%;padding:.75rem 1.25rem;border:1px solid transparent;border-radius:var(--cibc-radius-control);font-family:var(--cibc-font-sans);font-size:var(--cibc-text-ui);font-weight:600;line-height:var(--cibc-leading-ui);background:transparent;color:var(--cibc-color-text-secondary);cursor:pointer;transition:background-color var(--cibc-duration-fast)}.ds-ghost:hover:not(:disabled){background:var(--cibc-color-surface-subtle)}.ds-ghost:focus-visible{outline:var(--cibc-focus-width) solid var(--cibc-color-focus);outline-offset:var(--cibc-focus-offset)}.ds-ghost:disabled{background:var(--cibc-color-disabled);color:var(--cibc-color-on-disabled);cursor:not-allowed}@media(max-width:760px){.ds-ghost{min-height:var(--cibc-control-touch)}}@media(prefers-reduced-motion:reduce){.ds-ghost{transition:none}}"
+    },
+    {
+      "name": "Labelled field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "White field with a strong boundary and visible label.",
+      "html": "<label class=\"ds-field\">Assembly name<input class=\"ds-input\" type=\"text\" placeholder=\"Assembly name\"></label>",
+      "css": ".ds-field{display:block;font-family:var(--cibc-font-sans);font-size:var(--cibc-text-ui);font-weight:600;line-height:var(--cibc-leading-ui);color:var(--cibc-color-text-secondary)}.ds-input{display:block;margin-top:.5rem;width:100%;min-width:0;min-height:var(--cibc-control-height);padding:.75rem 1rem;border:1px solid var(--cibc-color-control-border);border-radius:var(--cibc-radius-control);font-family:var(--cibc-font-sans);font-size:var(--cibc-text-ui);font-weight:400;line-height:var(--cibc-leading-ui);color:var(--cibc-color-text);background:var(--cibc-color-surface);caret-color:var(--cibc-color-action)}.ds-input::placeholder{color:var(--cibc-color-text-muted);opacity:1}.ds-input:focus-visible{outline:var(--cibc-focus-width) solid var(--cibc-color-focus);outline-offset:var(--cibc-focus-offset)}.ds-input[aria-invalid=true]{border-color:var(--cibc-color-danger)}@media(max-width:760px){.ds-input{min-height:var(--cibc-control-touch)}}"
+    },
+    {
+      "name": "Five-stage progress",
+      "kind": "nav",
+      "refersTo": "progress-current",
+      "description": "Labelled sequence, not navigation shortcuts; states survive stacked reflow.",
+      "html": "<nav class=\"ds-progress\" aria-label=\"Wizard progress\"><ol><li aria-current=\"step\"><span class=\"ds-number\">1</span><strong>Assembly</strong><span>Current</span></li><li><span class=\"ds-number\">2</span><strong>Pool</strong><span>Upcoming</span></li><li><span class=\"ds-number\">3</span><strong>Quotas</strong><span>Upcoming</span></li><li><span class=\"ds-number\">4</span><strong>Draw</strong><span>Upcoming</span></li><li><span class=\"ds-number\">5</span><strong>Handoff</strong><span>Upcoming</span></li></ol></nav>",
+      "css": ".ds-progress{font-family:var(--cibc-font-sans);font-size:var(--cibc-text-caption);line-height:var(--cibc-leading-ui)}.ds-progress ol{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));list-style:none;gap:2px;margin:0;padding:0}.ds-progress li{display:flex;flex-direction:column;align-items:flex-start;gap:.5rem;min-width:0;padding:1rem;background:var(--cibc-color-surface-subtle);color:var(--cibc-color-text-secondary);overflow-wrap:anywhere}.ds-progress li[aria-current=step]{background:var(--cibc-color-surface-strong);color:var(--cibc-color-on-surface-strong)}.ds-progress .ds-number{display:inline-flex;align-items:center;justify-content:center;min-width:2rem;height:2rem;border:1px solid currentColor;border-radius:50%;font-weight:700}.ds-progress strong{font-weight:700}@media(max-width:760px){.ds-progress ol{grid-template-columns:1fr}.ds-progress li{display:grid;grid-template-columns:2rem minmax(0,1fr) auto;align-items:center;padding:.75rem;gap:.75rem}}@media(max-width:360px){.ds-progress li{grid-template-columns:2rem minmax(0,1fr)}.ds-progress li>span:last-child{grid-column:2}}"
+    },
+    {
+      "name": "Selectable feature tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Readable feature selection with a solid-blue selected state.",
+      "html": "<button class=\"ds-tag\" type=\"button\" aria-pressed=\"true\">region</button>",
+      "css": ".ds-tag{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:var(--cibc-control-compact);max-width:100%;padding:.5rem .75rem;border:1px solid var(--cibc-color-control-border);border-radius:var(--cibc-radius-control);font-family:var(--cibc-font-sans);font-size:var(--cibc-text-ui);font-weight:400;line-height:var(--cibc-leading-ui);color:var(--cibc-color-text-secondary);background:var(--cibc-color-surface);cursor:pointer}.ds-tag:hover{border-color:var(--cibc-color-action)}.ds-tag[aria-pressed=true]{background:var(--cibc-color-action);border-color:var(--cibc-color-action);color:var(--cibc-color-on-action)}.ds-tag:focus-visible{outline:var(--cibc-focus-width) solid var(--cibc-color-focus);outline-offset:var(--cibc-focus-offset)}@media(max-width:760px){.ds-tag{min-height:var(--cibc-control-touch)}}"
+    },
+    {
+      "name": "Step working surface",
+      "kind": "card",
+      "refersTo": "step-card",
+      "description": "Single white working surface, flat and generously padded.",
+      "html": "<section class=\"ds-card\"><h2>Panel size &amp; quotas</h2><p>Set the panel size and add stratification targets.</p></section>",
+      "css": ".ds-card{padding:2.5rem;border-radius:var(--cibc-radius-card);background:var(--cibc-color-surface);color:var(--cibc-color-text);font-family:var(--cibc-font-sans);font-size:var(--cibc-text-body);line-height:var(--cibc-leading-body);overflow-wrap:anywhere}.ds-card h2{margin:0 0 1rem;font-size:var(--cibc-text-heading);font-weight:700;line-height:var(--cibc-leading-heading);letter-spacing:var(--cibc-tracking-heading);text-wrap:balance}.ds-card p{margin:0;max-width:var(--cibc-measure-reading);color:var(--cibc-color-text-secondary)}@media(max-width:760px){.ds-card{padding:1.5rem 1rem}}"
+    },
+    {
+      "name": "Reproducibility field",
+      "kind": "custom",
+      "refersTo": "audit-record",
+      "description": "Full monospace values on the strong blue field; sample content is synthetic.",
+      "html": "<div class=\"ds-record\"><div class=\"ds-record-grid\"><span class=\"ds-record-label\">Draw ID</span><span>synthetic-draw-00000001</span><span class=\"ds-record-label\">Published seed</span><span>synthetic-seed</span></div></div>",
+      "css": ".ds-record{padding:1.5rem;border-radius:var(--cibc-radius-control);background:var(--cibc-color-surface-strong);color:var(--cibc-color-on-surface-strong);font-family:var(--cibc-font-mono);font-size:var(--cibc-text-ui);line-height:1.6;overflow-wrap:anywhere;word-break:break-all}.ds-record-grid{display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr);gap:1rem 1.5rem}.ds-record-label{font-family:var(--cibc-font-sans);font-size:var(--cibc-text-caption);font-weight:600}@media(max-width:760px){.ds-record-grid{grid-template-columns:minmax(0,1fr);gap:.5rem}.ds-record-grid>:nth-child(even){margin-bottom:.75rem}}"
+    },
+    {
+      "name": "Information disclosure",
+      "kind": "custom",
+      "refersTo": "disclosure-info",
+      "description": "Native explanation disclosure with a generous summary target.",
+      "html": "<details class=\"ds-disclosure\" open><summary>Is this draw fair? How to verify it<svg class=\"ds-chevron\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\"/></svg></summary><div class=\"ds-disclosure-body\">Every Allotment draw is reproducible.</div></details>",
+      "css": ".ds-disclosure{border:1px solid var(--cibc-color-info-border);border-radius:var(--cibc-radius-control);background:var(--cibc-color-info-surface);font-family:var(--cibc-font-sans);font-size:var(--cibc-text-ui);line-height:var(--cibc-leading-ui);overflow-wrap:anywhere}.ds-disclosure summary{display:flex;align-items:center;gap:.75rem;min-height:var(--cibc-control-height);padding:1rem;font-weight:600;color:var(--cibc-color-info);cursor:pointer;list-style:none}.ds-disclosure summary::-webkit-details-marker{display:none}.ds-disclosure summary:hover{text-decoration:underline;text-underline-offset:.18em}.ds-disclosure summary:focus-visible{outline:var(--cibc-focus-width) solid var(--cibc-color-focus);outline-offset:var(--cibc-focus-offset)}.ds-chevron{flex-shrink:0;margin-left:auto;transition:transform var(--cibc-duration-fast)}.ds-disclosure[open] .ds-chevron{transform:rotate(180deg)}.ds-disclosure-body{padding:0 1rem 1.25rem;color:var(--cibc-color-text-secondary)}@media(max-width:760px){.ds-disclosure summary{min-height:var(--cibc-control-touch)}}@media(prefers-reduced-motion:reduce){.ds-chevron{transition:none}}"
+    },
+    {
+      "name": "Probability distribution",
+      "kind": "custom",
+      "refersTo": "probability-distribution",
+      "description": "All ten ranges and counts survive reflow; synthetic counts illustrate the pattern.",
+      "html": "<div class=\"ds-distribution\" role=\"list\" aria-label=\"Selection probability distribution\"><div class=\"ds-bucket\" role=\"listitem\" style=\"--ds-bucket-scale:0\"><span class=\"ds-range\">0–10%</span><div class=\"ds-track\" aria-hidden=\"true\"><div class=\"ds-fill\"></div></div><span class=\"ds-count\">0<span class=\"ds-sr-only\"> candidates</span></span></div><div class=\"ds-bucket\" role=\"listitem\" style=\"--ds-bucket-scale:0\"><span class=\"ds-range\">10–20%</span><div class=\"ds-track\" aria-hidden=\"true\"><div class=\"ds-fill\"></div></div><span class=\"ds-count\">0<span class=\"ds-sr-only\"> candidates</span></span></div><div class=\"ds-bucket\" role=\"listitem\" style=\"--ds-bucket-scale:0\"><span class=\"ds-range\">20–30%</span><div class=\"ds-track\" aria-hidden=\"true\"><div class=\"ds-fill\"></div></div><span class=\"ds-count\">0<span class=\"ds-sr-only\"> candidates</span></span></div><div class=\"ds-bucket\" role=\"listitem\" style=\"--ds-bucket-scale:.25\"><span class=\"ds-range\">30–40%</span><div class=\"ds-track\" aria-hidden=\"true\"><div class=\"ds-fill\"></div></div><span class=\"ds-count\">1<span class=\"ds-sr-only\"> candidates</span></span></div><div class=\"ds-bucket\" role=\"listitem\" style=\"--ds-bucket-scale:.5\"><span class=\"ds-range\">40–50%</span><div class=\"ds-track\" aria-hidden=\"true\"><div class=\"ds-fill\"></div></div><span class=\"ds-count\">2<span class=\"ds-sr-only\"> candidates</span></span></div><div class=\"ds-bucket\" role=\"listitem\" style=\"--ds-bucket-scale:1\"><span class=\"ds-range\">50–60%</span><div class=\"ds-track\" aria-hidden=\"true\"><div class=\"ds-fill\"></div></div><span class=\"ds-count\">4<span class=\"ds-sr-only\"> candidates</span></span></div><div class=\"ds-bucket\" role=\"listitem\" style=\"--ds-bucket-scale:.5\"><span class=\"ds-range\">60–70%</span><div class=\"ds-track\" aria-hidden=\"true\"><div class=\"ds-fill\"></div></div><span class=\"ds-count\">2<span class=\"ds-sr-only\"> candidates</span></span></div><div class=\"ds-bucket\" role=\"listitem\" style=\"--ds-bucket-scale:.25\"><span class=\"ds-range\">70–80%</span><div class=\"ds-track\" aria-hidden=\"true\"><div class=\"ds-fill\"></div></div><span class=\"ds-count\">1<span class=\"ds-sr-only\"> candidates</span></span></div><div class=\"ds-bucket\" role=\"listitem\" style=\"--ds-bucket-scale:0\"><span class=\"ds-range\">80–90%</span><div class=\"ds-track\" aria-hidden=\"true\"><div class=\"ds-fill\"></div></div><span class=\"ds-count\">0<span class=\"ds-sr-only\"> candidates</span></span></div><div class=\"ds-bucket\" role=\"listitem\" style=\"--ds-bucket-scale:0\"><span class=\"ds-range\">90–100%</span><div class=\"ds-track\" aria-hidden=\"true\"><div class=\"ds-fill\"></div></div><span class=\"ds-count\">0<span class=\"ds-sr-only\"> candidates</span></span></div></div>",
+      "css": ".ds-distribution{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:.5rem;font-family:var(--cibc-font-sans);font-size:var(--cibc-text-caption);line-height:var(--cibc-leading-ui);font-variant-numeric:tabular-nums;color:var(--cibc-color-text-secondary);overflow-wrap:anywhere}.ds-bucket{display:grid;grid-template-rows:auto 5rem auto;gap:.5rem;text-align:center;min-width:0}.ds-range{grid-row:3}.ds-count{grid-row:1}.ds-track{grid-row:2;background:var(--cibc-data-empty);position:relative}.ds-fill{position:absolute;inset:0;background:var(--cibc-data-high);transform:scaleY(var(--ds-bucket-scale));transform-origin:bottom}.ds-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}@media(max-width:760px){.ds-distribution{grid-template-columns:minmax(0,1fr);gap:.75rem}.ds-bucket{grid-template-columns:6rem minmax(0,1fr) 2rem;grid-template-rows:auto;align-items:center;text-align:left}.ds-range,.ds-track,.ds-count{grid-row:auto}.ds-track{height:1rem}.ds-fill{transform:scaleX(var(--ds-bucket-scale));transform-origin:left}}@media(max-width:360px){.ds-bucket{grid-template-columns:minmax(0,1fr) 2rem}.ds-range{grid-column:1/-1}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Open Index",
+    "overview": "Allotment makes civic selection approachable through generous type, plain-language explanations and clearly labelled states. Yellow surrounds a white working surface; blue marks action, the current stage and the reproducibility record. Warmth comes from the page field and readable pacing rather than muted text or decorative effects.\n\nThis records the completed, user-approved adoption of Open Index (0.2.0-draft.1), pinned to immutable foundation revision `6df5682711d11d1dde20453d0e06a78aca48b34f`. The canonical foundation is `cibc-design-system/tokens.css`; its `guides/adoption.md` defines adoption boundaries. Allotment consumes the pinned dependency's `fonts.css` and `tokens.css` through `ui/src/main.tsx`, then maps its plain-CSS roles in `ui/src/index.css`. This is a light-only application: the foundation's dark palette is not an adopted theme, and there is no new theme preference storage.",
+    "keyCharacteristics": [
+      "Large locally served Public Sans, with monospace reserved for reproducibility values.",
+      "Flat yellow, white and blue fields; semantic feedback remains distinct.",
+      "Explicit sequence and state labels, not colour-only signals.",
+      "Responsive reflow preserves the complete task and its evidence."
+    ],
+    "rules": [
+      { "name": "The Brand Is Not Status Rule", "body": "Blue carries action and reference fields; green, amber and red carry outcome meaning, with visible text or icons alongside colour.", "section": "colors" },
+      { "name": "The Readable Detail Rule", "body": "Captions, table text, repeated quota labels and audit values retain the UI-size floor; hierarchy must not depend on microtype.", "section": "typography" }
+    ],
+    "dos": [
+      "**Do** use the immutable foundation dependency and local font imports before the application adapter.",
+      "**Do** keep every progress state, quota field and distribution bucket explicitly labelled through reflow.",
+      "**Do** preserve full seed/hash values and allow control labels and containers to grow with enlarged text.",
+      "**Do** pair feedback colour with text or icons and preserve keyboard focus and reduced-motion behavior."
+    ],
+    "donts": [
+      "**Don't** reuse success green as the brand action colour or infer a success state from a blue field.",
+      "**Don't** restore small uppercase micro-labels, pulse the current step or introduce decorative shadows.",
+      "**Don't** silently enable the foundation's dark theme or add theme preference storage.",
+      "**Don't** treat the sidecar's synthesized tonal previews as new application colours or rewrite the pinned foundation locally."
+    ]
+  }
+}

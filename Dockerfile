@@ -1,5 +1,5 @@
 # ── Stage 1: build the React UI ─────────────────────────────────────────────
-FROM node:20 AS ui
+FROM node:22 AS ui
 WORKDIR /ui
 COPY ui/package*.json ./
 # npm install (not `npm ci`): the lockfile is authored on Windows and omits the

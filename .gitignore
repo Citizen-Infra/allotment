@@ -11,3 +11,7 @@ ui/dist/
 .env
 *.egg-info/
 .superpowers/
+
+# Local synthetic review evidence is not a published product asset.
+.impeccable/review/
+.impeccable/mocks/

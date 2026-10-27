@@ -19,3 +19,6 @@ smoke.db
 test_allotment.db
 README.md
 LICENSE
+
+# Private screenshots, fixtures and design-tool metadata are not build inputs.
+.impeccable/

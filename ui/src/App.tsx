@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Shuffle, Check } from 'lucide-react';
 import Assembly from './steps/Assembly';
 import Pool from './steps/Pool';
@@ -41,6 +41,15 @@ const INITIAL: WizardState = {
 export default function App() {
   const [step, setStep]   = useState<Step>(0);
   const [state, setState] = useState<WizardState>(INITIAL);
+  const mainRef = useRef<HTMLElement>(null);
+  const previousStep = useRef(step);
+
+  useEffect(() => {
+    if (previousStep.current !== step) {
+      mainRef.current?.focus();
+      previousStep.current = step;
+    }
+  }, [step]);
 
   function reset() {
     setState(INITIAL);
@@ -62,25 +71,28 @@ export default function App() {
           <Shuffle size={17} strokeWidth={2.5} />
         </div>
         <div>
-          <div className="wordmark-text">Allotment</div>
+          <h1 className="wordmark-text">Allotment</h1>
           <div className="wordmark-sub">Sortition engine</div>
         </div>
       </header>
 
       {/* Ballot-strip progress track */}
       <nav className="ballot-track" aria-label="Wizard progress">
+        <ol>
         {STEPS.map((s, i) => (
-          <div key={s.label} className={stepClass(i)} aria-current={i === step ? 'step' : undefined}>
+          <li key={s.label} className={stepClass(i)} aria-current={i === step ? 'step' : undefined}>
             <div className="bs-num" aria-hidden="true">
-              {i < step ? <Check size={11} strokeWidth={3} /> : i + 1}
+              {i < step ? <Check size={20} strokeWidth={3} /> : i + 1}
             </div>
             <span className="bs-label">{s.label}</span>
-          </div>
+            <span className="bs-state">{i < step ? 'Complete' : i === step ? 'Current' : 'Upcoming'}</span>
+          </li>
         ))}
+        </ol>
       </nav>
 
       {/* Step card */}
-      <main className="card">
+      <main className="card" ref={mainRef} tabIndex={-1} aria-label={`${STEPS[step].label} · Step ${step + 1} of 5`}>
         {step === 0 && (
           <Assembly
             onDone={(assemblyId, token) => {
@@ -141,8 +153,8 @@ export default function App() {
         )}
       </main>
 
-      <footer style={{ textAlign: 'center', marginTop: 8 }}>
-        <p style={{ fontSize: 12, color: 'var(--slate-400)' }}>
+      <footer className="site-footer">
+        <p>
           Allotment · open-source sortition engine
         </p>
       </footer>
