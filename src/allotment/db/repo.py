@@ -1,9 +1,11 @@
 import json
-from datetime import datetime, UTC, timezone
+from datetime import UTC, datetime
+
 from sqlalchemy.orm import Session
-from allotment.crypto import encrypt, decrypt
-from allotment.db.models import AssemblyRow, PoolRow, DrawRow
-from allotment.domain import Pool, DrawResult, QuotaConfig
+
+from allotment.crypto import decrypt, encrypt
+from allotment.db.models import AssemblyRow, DrawRow, PoolRow
+from allotment.domain import DrawResult, Pool, QuotaConfig
 
 
 def _as_naive_utc(dt: datetime) -> datetime:
@@ -15,7 +17,7 @@ def _as_naive_utc(dt: datetime) -> datetime:
     comparisons — safe because every datetime we write is UTC.
     """
     if dt.tzinfo is not None:
-        return dt.astimezone(timezone.utc).replace(tzinfo=None)
+        return dt.astimezone(UTC).replace(tzinfo=None)
     return dt
 
 

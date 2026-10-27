@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { CSSProperties } from 'react';
 import { ShieldCheck, Copy, Check } from 'lucide-react';
 import { type DrawResult } from '../api';
 import Disclosure from '../components/Disclosure';
@@ -97,21 +98,21 @@ export default function Audit({ draw }: Props) {
           {copied ? 'Copied' : 'Copy record'}
         </button>
       </div>
-      <div className="mono-block" style={{ marginBottom: 24 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '8px 24px', alignItems: 'start' }}>
-          <span style={{ color: 'var(--slate-500)', fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', paddingTop: 2 }}>Draw ID</span>
+      <div className="mono-block audit-record" style={{ marginBottom: 24 }}>
+        <div className="audit-record-grid">
+          <span className="audit-record-label">Draw ID</span>
           <span style={{ wordBreak: 'break-all' }}>{draw.draw_id}</span>
 
-          <span style={{ color: 'var(--slate-500)', fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', paddingTop: 2 }}>Input hash</span>
+          <span className="audit-record-label">Input hash</span>
           <span style={{ wordBreak: 'break-all' }}>{audit.input_hash}</span>
 
-          <span style={{ color: 'var(--slate-500)', fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', paddingTop: 2 }}>Published seed</span>
+          <span className="audit-record-label">Published seed</span>
           <span style={{ wordBreak: 'break-all' }}>{audit.seed}</span>
 
-          <span style={{ color: 'var(--slate-500)', fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', paddingTop: 2 }}>Panel size</span>
+          <span className="audit-record-label">Panel size</span>
           <span>{audit.panel_size}</span>
 
-          <span style={{ color: 'var(--slate-500)', fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', paddingTop: 2 }}>Selected</span>
+          <span className="audit-record-label">Selected</span>
           <span>{selection.candidate_ids.length} candidates</span>
         </div>
       </div>
@@ -120,7 +121,7 @@ export default function Audit({ draw }: Props) {
       {hasQuotas && (
         <>
           <h3 style={{ marginBottom: 4 }}>Representativeness</h3>
-          <p style={{ fontSize: 13, color: 'var(--slate-500)', marginBottom: 14 }}>
+          <p className="hint" style={{ marginBottom: 14 }}>
             How closely the panel matches the centre of every quota band you set. 0 is a perfect match.
           </p>
           <div className="stat-grid">
@@ -142,42 +143,20 @@ export default function Audit({ draw }: Props) {
       {probs.length > 0 && (
         <>
           <h3 style={{ marginBottom: 12 }}>Realised selection probability distribution</h3>
-          <p style={{ fontSize: 13, color: 'var(--slate-500)', marginBottom: 14 }}>
+          <p className="hint" style={{ marginBottom: 14 }}>
             Each bucket spans 10 percentage points of individual selection probability.
           </p>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'flex-end',
-              gap: 4,
-              height: 80,
-              marginBottom: 6,
-            }}
-          >
+          <div className="probability-distribution" role="list" aria-label="Selection probability distribution">
             {buckets.map((count, i) => (
               <div
+                className="probability-bucket"
+                role="listitem"
                 key={i}
-                title={`${i * 10}–${(i + 1) * 10}%: ${count} candidates`}
-                style={{
-                  flex: 1,
-                  background: count > 0 ? 'var(--accent)' : 'var(--slate-200)',
-                  height: `${(count / maxBucket) * 100}%`,
-                  minHeight: count > 0 ? 4 : 2,
-                  borderRadius: '3px 3px 0 0',
-                  opacity: count > 0 ? 1 : 0.4,
-                }}
-              />
-            ))}
-          </div>
-          <div
-            style={{
-              display: 'flex', gap: 4, fontSize: 11,
-              color: 'var(--slate-500)', fontFamily: 'ui-monospace, monospace',
-            }}
-          >
-            {buckets.map((_, i) => (
-              <div key={i} style={{ flex: 1, textAlign: 'center' }}>
-                {i * 10}%
+                style={{ '--bucket-scale': count / maxBucket } as CSSProperties}
+              >
+                <span className="probability-label">{i * 10}–{(i + 1) * 10}%</span>
+                <div className="probability-track" aria-hidden="true"><div className="probability-fill" /></div>
+                <span className="probability-count">{count}<span className="sr-only"> candidates</span></span>
               </div>
             ))}
           </div>

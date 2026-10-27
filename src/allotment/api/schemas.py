@@ -1,6 +1,7 @@
 from typing import Any
 
 from pydantic import BaseModel, Field
+
 from allotment.domain import QuotaTarget
 
 

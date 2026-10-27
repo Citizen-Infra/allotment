@@ -1,5 +1,6 @@
 import csv
 import io
+
 from allotment.domain import Candidate, FeatureSpec, Pool
 
 

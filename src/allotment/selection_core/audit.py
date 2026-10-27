@@ -1,6 +1,7 @@
 import hashlib
 import json
 from datetime import UTC, datetime
+
 from allotment.domain import AuditRecord, DrawResult, Pool, QuotaConfig
 from allotment.selection_core.maximin import draw_selection
 
@@ -13,7 +14,7 @@ def canonical_input_hash(pool: Pool, config: QuotaConfig) -> str:
         "config": {
             "panel_size": config.panel_size,
             "targets": sorted(
-                ([t.feature, t.value, t.min, t.max] for t in config.targets)),
+                [t.feature, t.value, t.min, t.max] for t in config.targets),
         },
     }
     blob = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()

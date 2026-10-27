@@ -1,5 +1,7 @@
 import random
+
 import pulp
+
 from allotment.domain import Pool, QuotaConfig, Selection
 from allotment.selection_core.panels import generate_feasible_panels
 

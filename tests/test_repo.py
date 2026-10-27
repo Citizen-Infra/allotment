@@ -1,7 +1,9 @@
-import pytest
 from datetime import UTC, datetime, timedelta
-from allotment.db.session import make_session
+
+import pytest
+
 from allotment.db.repo import AssemblyRepo
+from allotment.db.session import make_session
 
 
 @pytest.fixture

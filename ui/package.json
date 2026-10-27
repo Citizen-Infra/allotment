@@ -5,11 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "test": "node --test test/*.test.mjs",
+    "sync-foundation-assets": "node scripts/sync-foundation-assets.mjs",
     "build": "tsc -b && vite build",
+    "postbuild": "node scripts/check-foundation-assets.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@citizen-infra/design-system": "git+https://github.com/Citizen-Infra/design-system.git#6df5682711d11d1dde20453d0e06a78aca48b34f",
     "lucide-react": "^1.21.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"

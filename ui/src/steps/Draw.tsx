@@ -89,7 +89,7 @@ export default function Draw({ token, assemblyId, panelSize, candidateCount, tar
           )}
 
           {loading && (
-            <div className="alert alert-info" style={{ justifyContent: 'center', gap: 12 }}>
+            <div className="alert alert-info" role="status" style={{ justifyContent: 'center', gap: 12 }}>
               <span className="spinner spinner-dark" aria-hidden="true" />
               <span>Running stratified draw…</span>
             </div>
@@ -104,8 +104,8 @@ export default function Draw({ token, assemblyId, panelSize, candidateCount, tar
               <span style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 600 }}>
                 <AlertCircle size={16} /> The draw could not be completed
               </span>
-              <span style={{ fontSize: 13 }}>{error}</span>
-              <span style={{ fontSize: 13, color: 'var(--slate-500)' }}>
+              <span>{error}</span>
+              <span style={{ color: 'var(--slate-500)' }}>
                 If the quotas are infeasible, go back and relax the conflicting min/max, or raise the panel size.
               </span>
             </div>
@@ -125,13 +125,13 @@ export default function Draw({ token, assemblyId, panelSize, candidateCount, tar
             </div>
             <div className="stat-card">
               <div className="stat-label">Draw ID</div>
-              <div className="stat-value" style={{ fontSize: 14, letterSpacing: 0, marginTop: 4 }}>
+              <div className="stat-value" style={{ letterSpacing: 0, marginTop: 4 }}>
                 <span className="mono-val">{result.draw_id.slice(0, 12)}…</span>
               </div>
             </div>
             <div className="stat-card">
               <div className="stat-label">Published seed</div>
-              <div className="stat-value" style={{ fontSize: 13, letterSpacing: 0, marginTop: 4 }}>
+              <div className="stat-value" style={{ letterSpacing: 0, marginTop: 4 }}>
                 <span className="mono-val" title={result.audit.seed}>
                   {result.audit.seed.slice(0, 14)}…
                 </span>
@@ -141,7 +141,7 @@ export default function Draw({ token, assemblyId, panelSize, candidateCount, tar
 
           {/* Warnings */}
           {result.warnings.length > 0 && (
-            <div className="alert alert-warn" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 6 }}>
+            <div className="alert alert-warn" role="status" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 6 }}>
               <strong style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <AlertTriangle size={15} /> {result.warnings.length} warning{result.warnings.length > 1 ? 's' : ''}
               </strong>
@@ -171,7 +171,8 @@ export default function Draw({ token, assemblyId, panelSize, candidateCount, tar
                       <div
                         className={`quota-fill ${cls}`}
                         style={{ transform: `scaleX(${pct / 100})` }}
-                        role="progressbar"
+                         role="progressbar"
+                         aria-label={`${t.feature} = ${t.value}`}
                         aria-valuenow={actual}
                         aria-valuemin={t.min}
                         aria-valuemax={t.max}
@@ -186,10 +187,10 @@ export default function Draw({ token, assemblyId, panelSize, candidateCount, tar
 
           {/* Selected cohort table */}
           <h3 style={{ marginBottom: 4 }}>Selected cohort</h3>
-          <p style={{ fontSize: 13, color: 'var(--slate-500)', marginBottom: 8 }}>
+          <p className="hint" style={{ marginBottom: 8 }}>
             {result.selection.candidate_ids.length} candidates selected (showing first 50)
           </p>
-          <div className="table-wrap">
+          <div className="table-wrap" tabIndex={0} role="region" aria-label="Selected cohort">
             <table>
               <thead>
                 <tr>

@@ -1,6 +1,8 @@
-from hypothesis import given, settings, strategies as st, HealthCheck
+from hypothesis import HealthCheck, given, settings
+from hypothesis import strategies as st
+
 from allotment.domain import QuotaConfig, QuotaTarget
-from allotment.selection_core.maximin import solve_maximin_weights, draw_selection
+from allotment.selection_core.maximin import draw_selection, solve_maximin_weights
 
 
 def _cfg():

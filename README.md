@@ -86,6 +86,40 @@ Run the test suite:
 .venv\Scripts\pytest
 ```
 
+### UI foundation and checks
+
+The UI adopts **Open Index 0.2.0-draft.1**, pinned through HTTPS Git to
+[`Citizen-Infra/design-system@6df5682711d11d1dde20453d0e06a78aca48b34f`](https://github.com/Citizen-Infra/design-system/tree/6df5682711d11d1dde20453d0e06a78aca48b34f).
+It is an explicit build-time dependency, not an npm publication, runtime CDN or
+automatic update. Public Sans is served locally; shared tokens feed the plain-CSS
+adapter in `ui/src/index.css`. The existing five-stage selection flow remains
+light-only, without a new theme preference store.
+
+Use Node **22.13 or newer on the Node 22 line** (or a supported Node 24+ release)
+for the current UI tooling; the Docker UI builder uses Node 22. From `ui/`:
+
+```bash
+npm ci
+npm test
+npm run lint
+npm run build
+```
+
+`npm test` checks the immutable pin, token/font imports, shipped notices and
+progress/form invariants without requiring a build. The automatic `postbuild`
+gate verifies both emitted Public Sans binaries and the MIT/OFL notices against
+the installed package byte-for-byte; failure-case tests cover missing and altered
+files. Private `.impeccable/` artifacts must stay out of Docker build contexts as
+well as Git publication; `.dockerignore` excludes that development-only directory.
+When deliberately changing the foundation
+pin, run `npm run sync-foundation-assets`, review the notice delta, and rerun the
+gates. Do not silently refresh a floating version or replace token values locally.
+
+Visual/workflow review must use synthetic candidate data and intercepted local
+API responses: clicking Harmonica handoff against a real API creates a real
+session. Browser fixtures must not send operator credentials or candidate data
+to integrations. Local review evidence is not production or algorithm testing.
+
 ---
 
 ## PII and data lifecycle

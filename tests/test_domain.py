@@ -1,5 +1,6 @@
 import pytest
 from pydantic import ValidationError
+
 from allotment.domain import QuotaConfig, QuotaTarget
 
 

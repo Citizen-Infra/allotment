@@ -1,5 +1,5 @@
-from allotment.domain import Selection
 from allotment.adapters.export import CsvJsonExport
+from allotment.domain import Selection
 
 
 def test_csv_export_contains_only_selected(sample_pool):

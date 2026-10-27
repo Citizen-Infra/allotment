@@ -1,21 +1,23 @@
 import json
 import secrets
 from collections.abc import Iterator
-from datetime import datetime, timedelta, UTC
+from datetime import UTC, datetime, timedelta
 from typing import Any
+
 from fastapi import APIRouter, Depends, HTTPException
-from allotment.api.auth import require_operator
-from allotment.api.schemas import CreateAssembly, UploadPool, RunDraw, Handoff
-from allotment.config import get_settings
-from allotment.db.session import make_session
-from allotment.db.repo import AssemblyRepo
-from allotment.domain import QuotaConfig, Selection
-from allotment.pool_csv import parse_pool_csv, PoolValidationError
-from allotment.quotas import precheck_feasibility
-from allotment.selection_core.audit import run_draw, build_audit_record
-from allotment.selection_core.panels import InfeasibleError
+
 from allotment.adapters.export import CsvJsonExport
 from allotment.adapters.harmonica import HarmonicaAdapter
+from allotment.api.auth import require_operator
+from allotment.api.schemas import CreateAssembly, Handoff, RunDraw, UploadPool
+from allotment.config import get_settings
+from allotment.db.repo import AssemblyRepo
+from allotment.db.session import make_session
+from allotment.domain import QuotaConfig, Selection
+from allotment.pool_csv import PoolValidationError, parse_pool_csv
+from allotment.quotas import precheck_feasibility
+from allotment.selection_core.audit import build_audit_record, run_draw
+from allotment.selection_core.panels import InfeasibleError
 
 router = APIRouter(prefix="/api", dependencies=[Depends(require_operator)])
 

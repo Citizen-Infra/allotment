@@ -69,20 +69,12 @@ export default function Handoff({ token, draw, onReset }: Props) {
       )}
 
       {/* Export section */}
-      <div
-        style={{
-          background: 'var(--surface)',
-          border: '1px solid var(--slate-200)',
-          borderRadius: 'var(--radius)',
-          padding: '20px 24px',
-          marginBottom: 16,
-        }}
-      >
+      <div className="handoff-section">
         <h3 style={{ marginBottom: 6 }}>
           <Download size={15} style={{ marginRight: 6, verticalAlign: 'middle' }} />
           Export cohort
         </h3>
-        <p style={{ fontSize: 14, color: 'var(--slate-500)', marginBottom: 16 }}>
+        <p className="hint" style={{ marginBottom: 16 }}>
           Download the selected candidate list with their IDs and realised probabilities.
         </p>
 
@@ -122,20 +114,12 @@ export default function Handoff({ token, draw, onReset }: Props) {
       </div>
 
       {/* Harmonica section */}
-      <div
-        style={{
-          background: 'var(--surface)',
-          border: '1px solid var(--slate-200)',
-          borderRadius: 'var(--radius)',
-          padding: '20px 24px',
-          marginBottom: 24,
-        }}
-      >
+      <div className="handoff-section">
         <h3 style={{ marginBottom: 6 }}>
           <ExternalLink size={15} style={{ marginRight: 6, verticalAlign: 'middle' }} />
           Create Harmonica session
         </h3>
-        <p style={{ fontSize: 14, color: 'var(--slate-500)', marginBottom: 16 }}>
+        <p className="hint" style={{ marginBottom: 16 }}>
           Invite the selected panel into a Harmonica deliberation session. Returns
           a join link to share with participants.
         </p>
@@ -143,7 +127,7 @@ export default function Handoff({ token, draw, onReset }: Props) {
         {harmonicaResult && (
           <div className="join-link-box" style={{ marginBottom: 16 }}>
             {harmonicaResult.session_id && (
-              <p style={{ fontSize: 12, color: 'var(--slate-500)', marginBottom: 6 }}>
+              <p className="hint" style={{ marginBottom: 6 }}>
                 Session ID: <span className="mono-val">{harmonicaResult.session_id}</span>
               </p>
             )}
@@ -156,7 +140,7 @@ export default function Handoff({ token, draw, onReset }: Props) {
                 </div>
               ))
             ) : (
-              <p style={{ fontSize: 14, color: 'var(--slate-500)' }}>
+              <p className="hint">
                 Session created — no join link returned. Check the Harmonica dashboard.
               </p>
             )}

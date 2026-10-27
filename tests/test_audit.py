@@ -1,9 +1,9 @@
 from allotment.domain import QuotaConfig, QuotaTarget
 from allotment.selection_core.audit import (
-    canonical_input_hash,
-    run_draw,
     build_audit_record,
+    canonical_input_hash,
     representativeness_indices,
+    run_draw,
 )
 
 
