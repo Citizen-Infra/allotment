@@ -1,6 +1,8 @@
 from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+
 from allotment.api.routes import router
 from allotment.db.session import create_all
 

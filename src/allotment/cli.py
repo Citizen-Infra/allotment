@@ -8,7 +8,7 @@ Usage:
 from __future__ import annotations
 
 import sys
-from datetime import datetime, UTC
+from datetime import UTC, datetime
 
 from allotment.db.repo import AssemblyRepo
 from allotment.db.session import create_all, make_session

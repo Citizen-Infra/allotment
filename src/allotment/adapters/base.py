@@ -1,5 +1,7 @@
 from typing import Any, Literal, Protocol
+
 from pydantic import BaseModel
+
 from allotment.domain import Pool, Selection
 
 

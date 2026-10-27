@@ -1,7 +1,9 @@
 import random
+
 import pytest
+
 from allotment.domain import QuotaConfig, QuotaTarget
-from allotment.selection_core.panels import generate_feasible_panels, InfeasibleError
+from allotment.selection_core.panels import InfeasibleError, generate_feasible_panels
 
 
 def _cfg():

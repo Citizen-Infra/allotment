@@ -1,5 +1,7 @@
 import random
+
 import pulp
+
 from allotment.domain import Pool, QuotaConfig
 
 

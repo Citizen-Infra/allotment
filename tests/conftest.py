@@ -1,8 +1,10 @@
 import os
+
 os.environ.setdefault("ALLOTMENT_DATABASE_URL", "sqlite:///./test_allotment.db")
 
 import pytest
-from allotment.domain import Candidate, Pool, FeatureSpec
+
+from allotment.domain import Candidate, FeatureSpec, Pool
 
 
 @pytest.fixture(scope="session", autouse=True)

@@ -1,5 +1,6 @@
 import pytest
-from allotment.pool_csv import parse_pool_csv, PoolValidationError
+
+from allotment.pool_csv import PoolValidationError, parse_pool_csv
 
 CSV = "id,contact,gender,age\nc0,c0@x.org,F,young\nc1,c1@x.org,M,old\n"
 

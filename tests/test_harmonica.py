@@ -1,8 +1,9 @@
 import json
 
 import httpx
-from allotment.domain import Selection
+
 from allotment.adapters.harmonica import HarmonicaAdapter
+from allotment.domain import Selection
 
 
 def test_harmonica_creates_session(sample_pool):

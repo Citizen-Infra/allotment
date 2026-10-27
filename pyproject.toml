@@ -17,6 +17,10 @@ testpaths = ["tests"]
 [tool.ruff]
 line-length = 100
 
+[tool.ruff.lint.flake8-bugbear]
+# FastAPI consumes these dependency markers; they are not evaluated per request.
+extend-immutable-calls = ["fastapi.Depends"]
+
 [tool.mypy]
 python_version = "3.12"
 strict = true

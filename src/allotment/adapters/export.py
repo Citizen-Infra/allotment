@@ -2,6 +2,7 @@ import csv
 import io
 import json
 from typing import Any, Literal
+
 from allotment.adapters.base import ProvisionResult
 from allotment.domain import Pool, Selection
 

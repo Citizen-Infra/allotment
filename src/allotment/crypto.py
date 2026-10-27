@@ -1,6 +1,8 @@
 import base64
 import hashlib
+
 from cryptography.fernet import Fernet
+
 from allotment.config import get_settings
 
 

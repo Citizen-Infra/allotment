@@ -1,5 +1,6 @@
 from fastapi import Depends, FastAPI
 from fastapi.testclient import TestClient
+
 from allotment.api.auth import require_operator
 
 
